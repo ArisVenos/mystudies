@@ -10,7 +10,10 @@ function App() {
 
     return (
         <div>
-            <Button colorScheme="green" onClick={incrementCount}>Click me</Button>
+            <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid black' }}>
+                <img src="./logo.png" alt="Logo" style={{ marginRight: 'auto' }} />
+                <Button colorScheme="green" onClick={incrementCount}>Click me</Button>
+            </div>
             <p>Count: {count}</p>
         </div>
     );
