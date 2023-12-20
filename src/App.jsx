@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
+import NavBar from './components/NavBar';
+import MainPage from './components/MainPage';
 
 function App() {
-    const [count, setCount] = useState(0);
-
-    const incrementCount = () => {
-        setCount(count + 1);
-    };
-
     return (
-        <div>
-            <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid black' }}>
-                <img src="./logo.png" alt="Logo" style={{ marginRight: 'auto' }} />
-                <Button colorScheme="green" onClick={incrementCount}>Click me</Button>
-            </div>
-            <p>Count: {count}</p>
-        </div>
+        <Grid templateAreas={'"nav" "main" "footer"'}>
+            <GridItem area='nav' bg='white'><NavBar/></GridItem>
+            <GridItem area='main' bg='white'><MainPage /></GridItem>
+            <GridItem area='footer' bg='#26abcc;'> Footer</GridItem>
+        </Grid>
     );
 }
 
