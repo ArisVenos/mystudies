@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
-import NavBar from './components/NavBar';
-import MainPage from './components/MainPage';
-import Footer from './components/Footer';
+import NavBar from './components/NavBar.jsx';
+import MainPage from './components/Mainpage.jsx';
+import Footer from './components/Footer.jsx';
 
-function App() {
+function MainApp() {
     return (
         <Grid templateAreas={'"nav" "main" "footer"'}>
             <GridItem area='nav' bg='white'><NavBar /></GridItem>
@@ -14,4 +14,4 @@ function App() {
     );
 }
 
-export default App;
+export default MainApp;

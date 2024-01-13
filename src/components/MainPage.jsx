@@ -10,7 +10,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const MainPage = () => {
     return (
-        <Flex justifyContent="center" alignItems="center" flexDirection="column" bgImage={bg} >
+        <Flex justifyContent="center" alignItems="center" flexDirection="column" bgImage={bg} bgSize="cover" bgPosition="center" bgRepeat="no-repeat">
             <div id="carouselExampleCaptions" className="carousel slide" style={{ marginTop: '30px', width: '1000px' , height: '600px' }}>
                 <div className="carousel-inner">
                     <div className="carousel-indicators">
