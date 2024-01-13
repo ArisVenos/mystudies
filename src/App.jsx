@@ -8,7 +8,7 @@ function App() {
         <Grid templateAreas={'"nav" "main" "footer"'}>
             <GridItem area='nav' bg='white'><NavBar/></GridItem>
             <GridItem area='main' bg='white'><MainPage /></GridItem>
-            <GridItem area='footer' bg='#26abcc;'> Footer</GridItem>
+            <GridItem area='footer' bg='#26abcc;' marginTop="50px"> Footer</GridItem>
         </Grid>
     );
 }
