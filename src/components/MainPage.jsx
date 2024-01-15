@@ -61,7 +61,18 @@ const MainPage = () => {
                         <Heading size='md'> Για τους φοιτητές:</Heading>
                         </CardHeader>
                         <CardBody>
-                        <Text>View a summary of all your customers over the last month.</Text>
+                        <Text>	
+                             Να δουν το Πρόγραμμα Σπουδών του Τμήματός τους
+                        </Text>
+                        <Text>
+                            Να κάνουν δήλωση μαθημάτων
+                        </Text>
+                        <Text>
+                            Να δουν τη βαθμολογία τους
+                        </Text>
+                        <Text>
+                            Να κάνουν αίτηση για την έκδοση πιστοποιητικών
+                        </Text>
                         </CardBody>
                         <CardFooter>
                         <Button bg="#26abcc" color="white" onClick={handleLoginClick} >ΣΥΝΔΕΣΗ</Button>
@@ -72,7 +83,18 @@ const MainPage = () => {
                         <Heading size='md'> Για τους καθηγητες:</Heading>
                         </CardHeader>
                         <CardBody>
-                        <Text>View a summary of all your customers over the last month.</Text>
+                            <Text>	
+                                Να δουν το Πρόγραμμα Σπουδών του Τμήματός τους
+                            </Text>
+                            <Text>
+                                Να κάνουν δήλωση μαθημάτων
+                            </Text>
+                            <Text>
+                                Να δουν τη βαθμολογία τους
+                            </Text>
+                            <Text>
+                                Να κάνουν αίτηση για την έκδοση πιστοποιητικών
+                            </Text>
                         </CardBody>
                         <CardFooter>
                         <Button bg="#26abcc" color="white" onClick={handleLoginClick}>ΣΥΝΔΕΣΗ</Button>
