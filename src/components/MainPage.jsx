@@ -1,4 +1,4 @@
-import { Flex, Image, Card, Text, CardHeader, CardBody, Heading, Button, CardFooter, Spacer} from "@chakra-ui/react";
+import { Flex, Image, Card, Text, CardHeader, CardBody, Heading, Button, CardFooter} from "@chakra-ui/react";
 import React from "react";
 import bg from "..//images/bg.jpg";
 import book from "..//images/book.jpg";

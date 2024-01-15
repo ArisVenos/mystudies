@@ -1,5 +1,6 @@
 import './Login.css'
 import React, { useState } from 'react';
+import { Button , ButtonGroup , Flex } from '@chakra-ui/react';
 //import { doc, getDoc } from 'firebase/firestore'
 
 
@@ -37,8 +38,8 @@ export default function Login({db}){
 
     return(
         <div className='login'>
-            <form onSubmit={handleLogin} className='login-container'>
-                <h2>Login</h2>
+            <form style={{height: '400px'}} onSubmit={handleLogin} className='login-container'>
+                <h2 style={{ textAlign: 'center' }}>ΕΙΣΟΔΟΣ</h2>
                 <div className='login-row'>
                     <label>Email:</label>
                     &nbsp;&nbsp;&nbsp;
@@ -57,8 +58,10 @@ export default function Login({db}){
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type='submit'>Login</button>
-                <a href='/register'>Create new user</a>
+                <Flex justifyContent="center" alignItems="center" flexDirection="column" marginTop='20px'>
+                    <Button variant='outline' color="#26abcc" borderColor="#26abcc" type='submit'>ΕΙΣΟΔΟΣ</Button>
+                    <a href='/register' style={{ marginTop: '20px'}} >ΝΕΟΣ ΧΡΗΣΤΗΣ</a>
+                </Flex> 
             </form>
         </div>
     )
