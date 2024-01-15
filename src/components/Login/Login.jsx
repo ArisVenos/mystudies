@@ -60,7 +60,7 @@ export default function Login({db}){
                 </div>
                 <Flex justifyContent="center" alignItems="center" flexDirection="column" marginTop='20px'>
                     <Button variant='outline' color="#26abcc" borderColor="#26abcc" type='submit'>ΕΙΣΟΔΟΣ</Button>
-                    <a href='/register' style={{ marginTop: '20px'}} >ΝΕΟΣ ΧΡΗΣΤΗΣ</a>
+                    <a href='/register' style={{ marginTop: '20px'}} onClick={() => window.location.href = '/register'}>ΝΕΟΣ ΧΡΗΣΤΗΣ</a>
                 </Flex> 
             </form>
         </div>
