@@ -9,6 +9,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
 const MainPage = () => {
+    const handleLoginClick = () => {
+        // Change the window location to the desired page
+        window.location.href = "/login.html";
+    };
+    
     return (
         <Flex justifyContent="center" alignItems="center" flexDirection="column" bgImage={bg} bgSize="cover" bgPosition="center" bgRepeat="no-repeat">
             <div id="carouselExampleCaptions" className="carousel slide" style={{ marginTop: '30px', width: '1000px' , height: '600px' }}>
@@ -59,7 +64,7 @@ const MainPage = () => {
                         <Text>View a summary of all your customers over the last month.</Text>
                         </CardBody>
                         <CardFooter>
-                        <Button bg="#26abcc" color="white">ΣΥΝΔΕΣΗ</Button>
+                        <Button bg="#26abcc" color="white" onClick={handleLoginClick} >ΣΥΝΔΕΣΗ</Button>
                         </CardFooter>
                     </Card>
                     <Card marginRight="100px" style={{ width: '400px'}}>
@@ -70,7 +75,7 @@ const MainPage = () => {
                         <Text>View a summary of all your customers over the last month.</Text>
                         </CardBody>
                         <CardFooter>
-                        <Button bg="#26abcc" color="white">ΣΥΝΔΕΣΗ</Button>
+                        <Button bg="#26abcc" color="white" onClick={handleLoginClick}>ΣΥΝΔΕΣΗ</Button>
                         </CardFooter>
                     </Card>
                 </Flex>
