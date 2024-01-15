@@ -8,10 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
-const MainPage = () => {
+const Mainpage = () => {
     const handleLoginClick = () => {
         // Change the window location to the desired page
-        window.location.href = "/login.html";
+        window.location.href = "/login";
     };
     
     return (
@@ -100,4 +100,4 @@ const MainPage = () => {
     );
 }
 
-export default MainPage;
+export default Mainpage;
