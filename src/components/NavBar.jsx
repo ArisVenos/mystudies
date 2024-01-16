@@ -6,7 +6,7 @@ import { Spacer } from "@chakra-ui/react";
 const NavBar = () => {
     const handleLoginClick = () => {
         // Change the window location to the desired page
-        window.location.href = "/login.html";
+        window.location.href = "/login";
     };
 
     const handleHomeClick = () => {

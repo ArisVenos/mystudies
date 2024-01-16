@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore'
-import { courses } from '../../Utils/Objects/objects';
 import './Register.css'
 
 export default function Register({db}){

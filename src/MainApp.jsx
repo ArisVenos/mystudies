@@ -5,6 +5,7 @@ import NavBar from './components/NavBar.jsx';
 import Mainpage from './components/Mainpage.jsx';
 import Footer from './components/Footer.jsx';
 import Login from './components/Login/Login.jsx';
+import Register from './components/Register/Register.jsx';
 
 import { firebaseConfig } from './config';
 import { initializeApp } from 'firebase/app';
@@ -22,7 +23,8 @@ function MainApp() {
                     <Routes>
                         <Route path="/" element={<Mainpage />} />
                         <Route path="/index.html" element={<Mainpage />} />
-                        <Route path="/login.html" element={<Login />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register db={db}/>} />
                     </Routes>
                 </BrowserRouter>
             </GridItem>
