@@ -1,7 +1,7 @@
 import './Login.css'
 import React, { useState } from 'react';
 import { Button , ButtonGroup , Flex } from '@chakra-ui/react';
-//import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 
 
 export default function Login({db}){

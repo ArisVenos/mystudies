@@ -8,6 +8,7 @@ import Login from './components/Login/Login.jsx';
 import Certificates from './components/Certificates/Certificates.jsx';
 import Register from './components/Register/Register.jsx';
 import CertificatesList from './components/Certificates/CertificatesList.jsx';
+import Profile from './components/Profile/Profile.jsx';
 
 import { firebaseConfig } from './config';
 import { initializeApp } from 'firebase/app';
@@ -29,6 +30,7 @@ function MainApp() {
                         <Route path="/certificateslist.html" element={<CertificatesList db={db} />} />
                         <Route path="/certificates.html" element={<Certificates db={db} />} />
                         <Route path="/register" element={<Register db={db} />} />
+                        <Route path="/profile" element={<Profile />} />
                     </Routes>
                 </BrowserRouter>
             </GridItem>

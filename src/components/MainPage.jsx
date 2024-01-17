@@ -63,7 +63,7 @@ const Mainpage = () => {
                 <Flex >
                     <Card marginRight="50px" style={{ width: '400px'}}>
                         <CardHeader>
-                        <Heading size='md'> Για τους φοιτητές:</Heading>
+                        <Heading size='md'> Για τους φοιτητές/τριες:</Heading>
                         </CardHeader>
                         <CardBody>
                         <Text>	
@@ -85,7 +85,7 @@ const Mainpage = () => {
                     </Card>
                     <Card marginRight="100px" style={{ width: '400px'}}>
                         <CardHeader>
-                        <Heading size='md'> Για τους καθηγητες:</Heading>
+                        <Heading size='md'> Για τους καθηγητές/τριες:</Heading>
                         </CardHeader>
                         <CardBody>
                             <Text>	
