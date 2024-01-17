@@ -62,13 +62,13 @@ const CertificateApplication = () => {
   
           // Check if the selected certificate is already applied
           if (appliedCertificates.some(cert => cert.title === selectedCertificate)) {
-            setMessage('Εχεις αιτηθει γιαυτο το πιστοποιητικο.');
+            setMessage('Εχεις αιτηθει ηδη γιαυτο το πιστοποιητικο.');
             return;
           }
   
           // Add the selected certificate to the user's applied certificates
           await updateDoc(userCertificateRef, {
-            certificates: arrayUnion({ title: selectedCertificate, status: 'pending' }),
+            certificates: arrayUnion({ title: selectedCertificate, status: 'ΣΕ ΕΚΚΡΕΜΟΤΗΤΑ' }),
           });
   
           setMessage('Η αιτηση σας ηταν επιτυχης');
@@ -102,7 +102,7 @@ const CertificateApplication = () => {
             ))}
           </Select>
         </FormControl>
-        {message && <Text color={message.includes('successful') ? 'green.500' : 'red.500'}>{message}</Text>}
+        {message && <Text color={message.includes('Η αιτηση σας ηταν επιτυχης') ? 'green.500' : 'red.500'}>{message}</Text>}
         <Button colorScheme="teal" onClick={handleApply} disabled={!selectedCertificate}>
           Επιβεβαιωση
         </Button>
