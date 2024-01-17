@@ -3,25 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { Button, FormControl, FormLabel, Select, Text, VStack, Center } from '@chakra-ui/react';
 
-/*
-const CertificateApplication = () => {
-  const [selectedCertificate, setSelectedCertificate] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleApply = () => {
-    // Simulate applying for a certificate without a backend
-    if (selectedCertificate) {
-      setMessage(`Η αιτηση σας για "${selectedCertificate}" ηταν επιτυχης`);
-    } else {
-      setMessage('Παρακαλω επιλεξτε καποιο πιστοποιητικο');
-    }
-  };
-
-  const certificatesData = [
-    { id: 1, title: 'ΣΙΤΙΣΗ' },
-    { id: 2, title: 'ΠΤΥΧΙΟ' },
-    { id: 3, title: 'ΠΑΥΣΗ ΣΠΟΥΔΩΝ' },
-  ];*/
 
   const CertificateApplication = ({ db }) => {
     const certificatesData = [
