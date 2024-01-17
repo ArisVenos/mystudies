@@ -12,7 +12,7 @@ import { getFirestore } from 'firebase/firestore';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
-
+//
 function MainApp() {
     return (
         <Grid templateAreas={'"nav" "route" "footer"'}>

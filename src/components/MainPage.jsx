@@ -7,7 +7,7 @@ import grade from "..//images/grade.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-
+//
 const Mainpage = () => {
     const handleLoginClick = () => {
         // Change the window location to the desired page

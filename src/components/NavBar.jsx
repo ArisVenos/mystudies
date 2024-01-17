@@ -3,6 +3,7 @@ import React from "react";
 import logo from "..//images/logo.png";
 import { Spacer } from "@chakra-ui/react";
 
+//
 const NavBar = () => {
     const handleLoginClick = () => {
         // Change the window location to the desired page
