@@ -30,7 +30,7 @@ function MainApp() {
                         <Route path="/certificateslist.html" element={<CertificatesList db={db} />} />
                         <Route path="/certificates.html" element={<Certificates db={db} />} />
                         <Route path="/register" element={<Register db={db} />} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/profile" element={<Profile db={db}/>} />
                     </Routes>
                 </BrowserRouter>
             </GridItem>

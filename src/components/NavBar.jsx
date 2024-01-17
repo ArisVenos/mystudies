@@ -24,7 +24,7 @@ const NavBar = () => {
 
   const handleProfileClick = () => {
     // Change the window location to the profile page or any other desired page for logged-in users
-    window.location.href = "/profile.html";
+    window.location.href = "/profile";
   };
 
   return (
