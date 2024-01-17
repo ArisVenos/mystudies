@@ -27,6 +27,11 @@ const NavBar = () => {
     window.location.href = "/profile";
   };
 
+  const handleCoursesClick = () => {
+    // Change the window location to the desired page
+    window.location.href = "/courses.html";
+  };
+
   return (
     <div>
       <HStack bg="white" p={2} borderBottom="4px solid #26abcc" justify="center">
@@ -47,7 +52,7 @@ const NavBar = () => {
         <Button bg="#26abcc" color="white" onClick={handleHomeClick} marginRight="20px">
           ΑΡΧΙΚΗ
         </Button>
-        <Button bg="#26abcc" color="white" marginRight="20px">
+        <Button bg="#26abcc" color="white" onClick={handleCoursesClick} marginRight="20px">
           ΔΗΛΩΣΕΙΣ
         </Button>
         <Button bg="#26abcc" color="white" onClick={handleCertificateClick} marginRight="20px">

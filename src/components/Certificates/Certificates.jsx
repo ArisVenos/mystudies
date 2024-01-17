@@ -3,25 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { Button, FormControl, FormLabel, Select, Text, VStack, Center } from '@chakra-ui/react';
 
-/*
-const CertificateApplication = () => {
-  const [selectedCertificate, setSelectedCertificate] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleApply = () => {
-    // Simulate applying for a certificate without a backend
-    if (selectedCertificate) {
-      setMessage(`Η αιτηση σας για "${selectedCertificate}" ηταν επιτυχης`);
-    } else {
-      setMessage('Παρακαλω επιλεξτε καποιο πιστοποιητικο');
-    }
-  };
-
-  const certificatesData = [
-    { id: 1, title: 'ΣΙΤΙΣΗ' },
-    { id: 2, title: 'ΠΤΥΧΙΟ' },
-    { id: 3, title: 'ΠΑΥΣΗ ΣΠΟΥΔΩΝ' },
-  ];*/
 
   const CertificateApplication = ({ db }) => {
     const certificatesData = [
@@ -62,13 +43,13 @@ const CertificateApplication = () => {
   
           // Check if the selected certificate is already applied
           if (appliedCertificates.some(cert => cert.title === selectedCertificate)) {
-            setMessage('Εχεις αιτηθει γιαυτο το πιστοποιητικο.');
+            setMessage('Εχεις αιτηθει ηδη γιαυτο το πιστοποιητικο.');
             return;
           }
   
           // Add the selected certificate to the user's applied certificates
           await updateDoc(userCertificateRef, {
-            certificates: arrayUnion({ title: selectedCertificate, status: 'pending' }),
+            certificates: arrayUnion({ title: selectedCertificate, status: 'ΣΕ ΕΚΚΡΕΜΟΤΗΤΑ' }),
           });
   
           setMessage('Η αιτηση σας ηταν επιτυχης');
@@ -102,7 +83,7 @@ const CertificateApplication = () => {
             ))}
           </Select>
         </FormControl>
-        {message && <Text color={message.includes('successful') ? 'green.500' : 'red.500'}>{message}</Text>}
+        {message && <Text color={message.includes('Η αιτηση σας ηταν επιτυχης') ? 'green.500' : 'red.500'}>{message}</Text>}
         <Button colorScheme="teal" onClick={handleApply} disabled={!selectedCertificate}>
           Επιβεβαιωση
         </Button>
