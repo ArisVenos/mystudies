@@ -29,7 +29,7 @@ export default function Login({db}){
             localStorage.setItem('email', user_email)
 
             // Go to page /courses
-            window.location.href = './courses'
+            window.location.href = './index.html'
             console.log("Found User:", res.data());
         } else {
             console.log("No such document!");

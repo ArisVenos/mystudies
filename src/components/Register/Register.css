@@ -1,6 +1,6 @@
 .register{
     width: 100vw;
-    height: 100vh;
+    height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,18 +20,6 @@
 }
 .register-container h2{
     margin: 0px;
-}
-
-.register-container button{
-    background-color: rgb(86, 86, 86);
-    border: none;
-    padding: 8px;
-    position: absolute;
-    left: 13px;
-    bottom: 13px;
-    color: white;
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .register-row{
     text-align: left;
