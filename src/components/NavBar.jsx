@@ -3,7 +3,6 @@ import React from "react";
 import logo from "..//images/logo.png";
 import { Spacer } from "@chakra-ui/react";
 
-//
 const NavBar = () => {
     const handleLoginClick = () => {
         // Change the window location to the desired page
@@ -13,6 +12,11 @@ const NavBar = () => {
     const handleHomeClick = () => {
         // Change the window location to the desired page
         window.location.href = "/index.html";
+    };
+
+    const handleCertificateClick = () => {
+        // Change the window location to the desired page
+        window.location.href = "/certificateslist.html";
     };
 
     return (
@@ -31,7 +35,7 @@ const NavBar = () => {
                 <Button bg="#26abcc" color="white" marginRight="20px">
                     ΔΗΛΩΣΕΙΣ
                 </Button>
-                <Button bg="#26abcc" color="white" marginRight="20px">
+                <Button bg="#26abcc" color="white" onClick={handleCertificateClick} marginRight="20px">
                     ΠΙΣΤΟΠΟΙΗΤΙΚΑ
                 </Button>
                 <Button bg="#26abcc" color="white">
