@@ -62,7 +62,7 @@ const CertificateApplication = () => {
   
           // Check if the selected certificate is already applied
           if (appliedCertificates.some(cert => cert.title === selectedCertificate)) {
-            setMessage('You have already applied for this certificate.');
+            setMessage('Εχεις αιτηθει γιαυτο το πιστοποιητικο.');
             return;
           }
   
@@ -71,7 +71,7 @@ const CertificateApplication = () => {
             certificates: arrayUnion({ title: selectedCertificate, status: 'pending' }),
           });
   
-          setMessage('Certificate application successful!');
+          setMessage('Η αιτηση σας ηταν επιτυχης');
         } else {
           setMessage('User not found. Please log in again.');
         }
@@ -85,8 +85,8 @@ const CertificateApplication = () => {
   return (
     <Center>
       <VStack align="start" spacing={4}  p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
-        <Text fontSize="2xl" fontWeight="bold" mb={4}>
-          ΑΙΤΗΣΗ ΠΙΣΤΟΠΟΙΗΤΙΚΟΥ
+        <Text fontSize="2xl" fontWeight="bold" bg="#26abcc" color="white" mb={4}>
+          ΝΕΑ ΑΙΤΗΣΗ
         </Text>
         <FormControl>
           <FormLabel>Πιστοποιητικο:</FormLabel>
