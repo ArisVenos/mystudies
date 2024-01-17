@@ -1,20 +1,17 @@
-// Profile.jsx
 import React, { useState, useEffect } from 'react';
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text, Button } from '@chakra-ui/react';
 import { doc, getDoc } from 'firebase/firestore';
+import { getAuth , signOut } from 'firebase/auth'; 
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-  } from '@chakra-ui/react'
+  Table,
+  Thead,
+  Tbody,
+  Td,
+  Tr,
+  TableContainer,
+} from '@chakra-ui/react';
 
-const Profile = ({ db }) => {
+const Profile = ({ db}) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -42,24 +39,38 @@ const Profile = ({ db }) => {
     }
   }, [db]);
 
+  const handleLogout = async () => {
+    const auth = getAuth();
+    
+    try {
+      await signOut(auth); // Use the signOut function from firebase/auth
+      localStorage.clear(); // Clear local storage
+      window.location.href = '/'; // Redirect to the home page or login page
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
-    <Flex direction="column" align="center"  height="100vh">
+    <Flex direction="column" align="center" height="100vh">
       <Heading mb={4}>ΣΤΟΙΧΕΙΑ ΧΡΗΣΤΗ</Heading>
       {userData ? (
         <div>
-            <TableContainer width="300px">
-                <Table variant="striped" bg="#26abcc">
-                    <Tbody>
-                    <Tr>
-                        <Td>Email: {userData.email}</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>Role: {userData.role}</Td>
-                    </Tr>
-                    </Tbody>
-                </Table>
-            </TableContainer> 
-          {/* Add additional user data fields as needed */}
+          <TableContainer width="300px">
+            <Table variant="striped" bg="#26abcc">
+              <Tbody>
+                <Tr>
+                  <Td>Email: {userData.email}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Role: {userData.role}</Td>
+                </Tr>
+              </Tbody>
+            </Table>
+          </TableContainer>
+          <Button mt={4} colorScheme="red" onClick={handleLogout}>
+            Αποσύνδεση
+          </Button>
         </div>
       ) : (
         <Text>Loading user data...</Text>
