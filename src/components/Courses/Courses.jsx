@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Checkbox, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, VStack, Center } from '@chakra-ui/react';
+import { Checkbox, Box, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, VStack, Center } from '@chakra-ui/react';
 
 const CourseApplication = ({ db }) => {
+  const handleHistoryClick = () => {
+    // Change the window location to the desired page
+    window.location.href = "/courseshistory";
+  };
   const semestersData = [
     { id: 1, title: '1o ΕΞΑΜΗΝΟ' },
     { id: 2, title: '2o ΕΞΑΜΗΝΟ' },
@@ -83,7 +87,7 @@ const CourseApplication = ({ db }) => {
       const userCourseRef = doc(userCoursesCollection, userEmail);
 
       const userCourseDoc = await getDoc(userCourseRef);
-
+      
       if (userCourseDoc.exists()) {
         const userData = userCourseDoc.data();
         const appliedCourses = userData.courses || [];
@@ -152,6 +156,11 @@ const CourseApplication = ({ db }) => {
           ΔΗΛΩΣΗ
         </Button>
       </VStack>
+      <Box bg="#26abcc"  borderBottom="4px solid #4f4f50" position="absolute" top={210} left={20}>
+        <Button bg="#26abcc" color="white" onClick={handleHistoryClick} >
+          ΙΣΤΟΡΙΚΟ ΔΗΛΩΣΕΩΝ
+        </Button>
+      </Box> 
     </Center>
   );
 };

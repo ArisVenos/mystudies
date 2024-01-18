@@ -19,7 +19,7 @@ const NavBar = () => {
 
   const handleCertificateClick = () => {
     // Change the window location to the desired page
-    window.location.href = "/certificateslist.html";
+    window.location.href = "/certificateslist";
   };
 
   const handleProfileClick = () => {
@@ -29,7 +29,7 @@ const NavBar = () => {
 
   const handleCoursesClick = () => {
     // Change the window location to the desired page
-    window.location.href = "/courses.html";
+    window.location.href = "/courses";
   };
 
   return (

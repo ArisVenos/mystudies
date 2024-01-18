@@ -5,7 +5,7 @@ import { Button, Spacer, Box, Text, VStack, Center, HStack } from '@chakra-ui/re
 const AppliedCertificatesList = ({ db }) => {
   const handleNewClick = () => {
     // Change the window location to the desired page
-    window.location.href = "/certificates.html";
+    window.location.href = "/certificates";
   };
   const [appliedCertificates, setAppliedCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
