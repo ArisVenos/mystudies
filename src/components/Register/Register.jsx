@@ -10,49 +10,51 @@ import {
   AlertDialogOverlay,
   AlertDialogCloseButton,
 } from '@chakra-ui/react';
-//import { courses } from '../../Utils/Objects/objects';
 import './Register.css';
 
 export default function Register({ db }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isOpen, onOpen, onClose } = useDisclosure(); // useDisclosure hook is needed to control the dialog state
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // Handles the register functionality of the user
+  const userCourses = [
+    { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ', grade: -1, declared: -1, semesterId: 1 },
+    { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ', grade: -1, declared: -1, semesterId: 1 },
+    { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', grade: -1, declared: -1, semesterId: 1 },
+    { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ', grade: -1, declared: -1, semesterId: 2 },
+    { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ', grade: -1, declared: -1, semesterId: 2 },
+    { id: 6, title: 'ΑΝΑΛΥΣΗ 1', grade: -1, declared: -1, semesterId: 2 },
+    { id: 7, title: 'ΑΝΑΛΥΣΗ 2', grade: -1, declared: -1, semesterId: 3 },
+    { id: 8, title: 'ΣΗΜΑΤΑ ΚΑΙ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 3 },
+    { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ', grade: -1, declared: -1, semesterId: 4 },
+    { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1', grade: -1, declared: -1, semesterId: 4 },
+    { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 5 },
+    { id: 12, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ', grade: -1, declared: -1, semesterId: 6 },
+    // Add other courses with appropriate semesterId
+  ];
+
+  const docUser = {
+    email: email,
+    password: password,
+    role: 'student',
+    courses: userCourses,
+  };
+
   async function handleRegister(e) {
     e.preventDefault();
 
-    // Check if email and password are not empty
     if (!email || !password) {
       // Handle empty fields if needed
       return;
     }
 
-    // This object represents the user's form that will be saved in our database.
-    const docUser = {
-      email: email,
-      password: password,
-      role: 'student',
-      courses: [
-        {
-          name: 'Επικοινωνία Ανθρώπου Μηχανής',
-          grade: 10,
-        },
-      ],
-    };
-
     try {
-      // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key as the email of the user
       const ref_user = doc(db, 'users', email);
-      // Then we use setDoc to push the 'user object' to the referenced user
       const res_user = await setDoc(ref_user, docUser);
 
-      // At the same time, we push all the courses to the db.
-      // We create a 'courses' collection with primary key 'all_courses'
       const ref_courses = doc(db, 'courses', 'all_courses');
-      const res_courses = await setDoc(ref_courses, courses);
+      const res_courses = await setDoc(ref_courses, { courses: userCourses });
 
-      // Open the AlertDialog when registration is successful
       onOpen();
     } catch (e) {
       console.log(e);
@@ -62,10 +64,8 @@ export default function Register({ db }) {
   function AlertDialogExample() {
     const cancelRef = React.useRef();
 
-    // Handle the click event for the button in the alert
     const handleLoginClick = () => {
-      onClose(); // Close the alert
-      // Redirect to the login page
+      onClose();
       window.location.href = '/login';
     };
 
@@ -80,7 +80,6 @@ export default function Register({ db }) {
             <AlertDialogBody>Επιστρέψτε στην είσοδο</AlertDialogBody>
 
             <AlertDialogFooter>
-              {/* Add a button to return to the login page */}
               <Button variant="solid" bg='#26abcc' onClick={handleLoginClick}>
                 ΕΠΙΣΤΡΟΦΗ
               </Button>
@@ -116,7 +115,6 @@ export default function Register({ db }) {
           />
         </div>
         <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
-          {/* Pass onOpen as the function to be executed onClick */}
           <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
             ΕΓΓΡΑΦΗ
           </Button>
@@ -126,8 +124,8 @@ export default function Register({ db }) {
         </Flex>
       </form>
 
-      {/* Render the AlertDialogExample component only if it is open */}
       {isOpen && <AlertDialogExample />}
     </div>
   );
 }
+
