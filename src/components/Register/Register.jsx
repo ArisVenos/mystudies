@@ -53,18 +53,6 @@ export default function Register({ db }) {
       return;
     }
 
-    // This object represents the user's form that will be saved in our database.
-    const docUser = {
-      email: email,
-      password: password,
-      role: 'student',
-      courses: [
-        {
-          name: 'Επικοινωνία Ανθρώπου Μηχανής',
-          grade: 10,
-        },
-      ],
-    };
 
     try {
       // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key as the email of the user
@@ -74,7 +62,7 @@ export default function Register({ db }) {
       // At the same time, we push all the courses to the db.
       // We create a 'courses' collection with primary key 'all_courses'
       const ref_courses = doc(db, 'courses', 'all_courses');
-      const res_courses = await setDoc(ref_courses, courses);
+      const res_courses = await setDoc(ref_courses, { courses: userCourses });
 
       onOpen();
     } catch (e) {
