@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
-import { Button, Input, Flex, useDisclosure } from '@chakra-ui/react';
+import { Button, Input, Flex, useDisclosure , Image } from '@chakra-ui/react';
+import logo from "./logo.png";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -15,6 +16,9 @@ import './Register.css';
 
 export default function Register({ db }) {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure(); // useDisclosure hook is needed to control the dialog state
 
@@ -23,13 +27,16 @@ export default function Register({ db }) {
     e.preventDefault();
 
     // Check if email and password are not empty
-    if (!email || !password) {
-      // Handle empty fields if needed
+    if (!email || !password || !name || !surname || !id) {
+      setMessage('Συμπληρώστε όλα τα πεδία');
       return;
     }
 
     // This object represents the user's form that will be saved in our database.
     const docUser = {
+      name: name,
+      surname: surname,
+      id: id,
       email: email,
       password: password,
       role: 'student',
@@ -49,8 +56,6 @@ export default function Register({ db }) {
 
       // At the same time, we push all the courses to the db.
       // We create a 'courses' collection with primary key 'all_courses'
-      const ref_courses = doc(db, 'courses', 'all_courses');
-      const res_courses = await setDoc(ref_courses, courses);
 
       // Open the AlertDialog when registration is successful
       onOpen();
@@ -92,42 +97,77 @@ export default function Register({ db }) {
   }
 
   return (
-    <div className='register'>
-      <form style={{ height: '400px', width: '300px' }} onSubmit={handleRegister} className='register-container'>
-        <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>ΕΓΓΡΑΦΗ</h2>
-        <div className='register-row'>
-          &nbsp;&nbsp;&nbsp;
-          <Input
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            variant='filled'
-            placeholder='Email'
-          />
-        </div>
-        <div className='register-row'>
-          &nbsp;&nbsp;&nbsp;
-          <Input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            variant='filled'
-            placeholder='Password'
-          />
-        </div>
-        <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
-          {/* Pass onOpen as the function to be executed onClick */}
-          <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
-            ΕΓΓΡΑΦΗ
-          </Button>
-          <a href='/login' style={{ marginTop: '20px' }} onClick={() => window.location.href = '/login'}>
-            Already have an Account?
-          </a>
-        </Flex>
-      </form>
+      <div className='register'>
+        <form style={{ height: '600px', width: '600px' }} onSubmit={handleRegister} className='register-container'>
+          <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>ΕΓΓΡΑΦΗ</h2>
+          <Flex justifyContent='center' alignItems='center' flexDirection='row' >
+          <Image src={logo} alt="logo" marginRight="60px" width="250px"/>
+            <Flex justifyContent='center' alignItems='center' flexDirection='column'>
+              <div className='register-row'>
+                &nbsp;&nbsp;&nbsp;
+                <Input
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  variant='filled'
+                  placeholder='Email'
+                />
+              </div>
+              <div className='register-row'>
+                &nbsp;&nbsp;&nbsp;
+                <Input
+                  type='name'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  variant='filled'
+                  placeholder='Ονομα'
+                />
+              </div>
+              <div className='register-row'>
+                &nbsp;&nbsp;&nbsp;
+                <Input
+                  type='surname'
+                  value={surname}
+                  onChange={(e) => setSurname(e.target.value)}
+                  variant='filled'
+                  placeholder='Επιθετο'
+                />
+              </div>
+              <div className='register-row'>
+                &nbsp;&nbsp;&nbsp;
+                <Input
+                  type='id'
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  variant='filled'
+                  placeholder='ΑΜ'
+                />
+              </div>
+              <div className='register-row'>
+                &nbsp;&nbsp;&nbsp;
+                <Input
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  variant='filled'
+                  placeholder='Password'
+                />
+              </div>
+          </Flex>
+          </Flex>
+          <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
+                {/* Pass onOpen as the function to be executed onClick */}
+                <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
+                  ΕΓΓΡΑΦΗ
+                </Button>
+                <a href='/login' style={{ marginTop: '20px', fontWeight: 'bold', textAlign: 'center' }} onClick={() => window.location.href = '/login'}>
+                  Έχετε ήδη λογαριασμό; Συνδεθείτε
+                </a>
+              </Flex>
+        </form>
 
-      {/* Render the AlertDialogExample component only if it is open */}
-      {isOpen && <AlertDialogExample />}
-    </div>
+        {/* Render the AlertDialogExample component only if it is open */}
+        {isOpen && <AlertDialogExample />}
+      </div>
   );
 }
