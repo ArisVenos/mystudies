@@ -52,18 +52,27 @@ const Profile = ({ db}) => {
   };
 
   return (
-    <Flex direction="column" align="center" height="100vh">
-      <Heading mb={4}>ΣΤΟΙΧΕΙΑ ΧΡΗΣΤΗ</Heading>
+    <Flex direction="column" align="center" height="76vh">
+      <Heading mb={4} marginTop="20px">ΣΤΟΙΧΕΙΑ ΧΡΗΣΤΗ</Heading>
       {userData ? (
         <div>
-          <TableContainer width="300px">
+          <TableContainer width="500px" border="2px">
             <Table variant="striped" bg="#26abcc">
               <Tbody>
                 <Tr>
-                  <Td>Email: {userData.email}</Td>
+                  <Td>Ονομα: {userData.name}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Επίθετο: {userData.surname}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Αριθμός μητρώου: {userData.id}</Td>
                 </Tr>
                 <Tr>
                   <Td>Role: {userData.role}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Email: {userData.email}</Td>
                 </Tr>
               </Tbody>
             </Table>

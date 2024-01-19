@@ -38,6 +38,9 @@ export default function Register({ db }) {
   ];
 
   const docUser = {
+    name: name,
+    surname: surname,
+    id: id,
     email: email,
     password: password,
     role: 'student',
@@ -53,18 +56,6 @@ export default function Register({ db }) {
       return;
     }
 
-    // This object represents the user's form that will be saved in our database.
-    const docUser = {
-      email: email,
-      password: password,
-      role: 'student',
-      courses: [
-        {
-          name: 'Επικοινωνία Ανθρώπου Μηχανής',
-          grade: 10,
-        },
-      ],
-    };
 
     try {
       // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key as the email of the user
@@ -113,42 +104,76 @@ export default function Register({ db }) {
 
   return (
     <div className='register'>
-      <form style={{ height: '400px', width: '300px' }} onSubmit={handleRegister} className='register-container'>
+      <form style={{ height: '600px', width: '600px' }} onSubmit={handleRegister} className='register-container'>
         <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>ΕΓΓΡΑΦΗ</h2>
-        <div className='register-row'>
-          &nbsp;&nbsp;&nbsp;
-          <Input
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            variant='filled'
-            placeholder='Email'
-          />
-        </div>
-        <div className='register-row'>
-          &nbsp;&nbsp;&nbsp;
-          <Input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            variant='filled'
-            placeholder='Password'
-          />
-        </div>
-        <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
-          {/* Pass onOpen as the function to be executed onClick */}
-          <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
-            ΕΓΓΡΑΦΗ
-          </Button>
-          <a href='/login' style={{ marginTop: '20px' }} onClick={() => window.location.href = '/login'}>
-            Already have an Account?
-          </a>
+        <Flex justifyContent='center' alignItems='center' flexDirection='row' >
+        <Image src={logo} alt="logo" marginRight="60px" width="250px"/>
+          <Flex justifyContent='center' alignItems='center' flexDirection='column'>
+            <div className='register-row'>
+              &nbsp;&nbsp;&nbsp;
+              <Input
+                type='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                variant='filled'
+                placeholder='Email'
+              />
+            </div>
+            <div className='register-row'>
+              &nbsp;&nbsp;&nbsp;
+              <Input
+                type='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                variant='filled'
+                placeholder='Ονομα'
+              />
+            </div>
+            <div className='register-row'>
+              &nbsp;&nbsp;&nbsp;
+              <Input
+                type='surname'
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                variant='filled'
+                placeholder='Επιθετο'
+              />
+            </div>
+            <div className='register-row'>
+              &nbsp;&nbsp;&nbsp;
+              <Input
+                type='id'
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                variant='filled'
+                placeholder='ΑΜ'
+              />
+            </div>
+            <div className='register-row'>
+              &nbsp;&nbsp;&nbsp;
+              <Input
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                variant='filled'
+                placeholder='Password'
+              />
+            </div>
         </Flex>
+        </Flex>
+        <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
+              {/* Pass onOpen as the function to be executed onClick */}
+              <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
+                ΕΓΓΡΑΦΗ
+              </Button>
+              <a href='/login' style={{ marginTop: '20px', fontWeight: 'bold', textAlign: 'center' }} onClick={() => window.location.href = '/login'}>
+                Έχετε ήδη λογαριασμό; Συνδεθείτε
+              </a>
+            </Flex>
       </form>
 
       {/* Render the AlertDialogExample component only if it is open */}
       {isOpen && <AlertDialogExample />}
     </div>
-  );
-}
-
+);
+} 
