@@ -11,7 +11,6 @@ import {
   AlertDialogOverlay,
   AlertDialogCloseButton,
 } from '@chakra-ui/react';
-//import { courses } from '../../Utils/Objects/objects';
 import './Register.css';
 
 export default function Register({ db }) {
@@ -20,23 +19,42 @@ export default function Register({ db }) {
   const [surname, setSurname] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { isOpen, onOpen, onClose } = useDisclosure(); // useDisclosure hook is needed to control the dialog state
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // Handles the register functionality of the user
+  const userCourses = [
+    { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ', grade: -1, declared: -1, semesterId: 1 },
+    { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ', grade: -1, declared: -1, semesterId: 1 },
+    { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', grade: -1, declared: -1, semesterId: 1 },
+    { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ', grade: -1, declared: -1, semesterId: 2 },
+    { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ', grade: -1, declared: -1, semesterId: 2 },
+    { id: 6, title: 'ΑΝΑΛΥΣΗ 1', grade: -1, declared: -1, semesterId: 2 },
+    { id: 7, title: 'ΑΝΑΛΥΣΗ 2', grade: -1, declared: -1, semesterId: 3 },
+    { id: 8, title: 'ΣΗΜΑΤΑ ΚΑΙ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 3 },
+    { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ', grade: -1, declared: -1, semesterId: 4 },
+    { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1', grade: -1, declared: -1, semesterId: 4 },
+    { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 5 },
+    { id: 12, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ', grade: -1, declared: -1, semesterId: 6 },
+    // Add other courses with appropriate semesterId
+  ];
+
+  const docUser = {
+    email: email,
+    password: password,
+    role: 'student',
+    courses: userCourses,
+  };
+
   async function handleRegister(e) {
     e.preventDefault();
 
     // Check if email and password are not empty
-    if (!email || !password || !name || !surname || !id) {
-      setMessage('Συμπληρώστε όλα τα πεδία');
+    if (!email || !password) {
+      // Handle empty fields if needed
       return;
     }
 
     // This object represents the user's form that will be saved in our database.
     const docUser = {
-      name: name,
-      surname: surname,
-      id: id,
       email: email,
       password: password,
       role: 'student',
@@ -51,13 +69,13 @@ export default function Register({ db }) {
     try {
       // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key as the email of the user
       const ref_user = doc(db, 'users', email);
-      // Then we use setDoc to push the 'user object' to the referenced user
       const res_user = await setDoc(ref_user, docUser);
 
       // At the same time, we push all the courses to the db.
       // We create a 'courses' collection with primary key 'all_courses'
+      const ref_courses = doc(db, 'courses', 'all_courses');
+      const res_courses = await setDoc(ref_courses, courses);
 
-      // Open the AlertDialog when registration is successful
       onOpen();
     } catch (e) {
       console.log(e);
@@ -67,10 +85,8 @@ export default function Register({ db }) {
   function AlertDialogExample() {
     const cancelRef = React.useRef();
 
-    // Handle the click event for the button in the alert
     const handleLoginClick = () => {
-      onClose(); // Close the alert
-      // Redirect to the login page
+      onClose();
       window.location.href = '/login';
     };
 
@@ -85,7 +101,6 @@ export default function Register({ db }) {
             <AlertDialogBody>Επιστρέψτε στην είσοδο</AlertDialogBody>
 
             <AlertDialogFooter>
-              {/* Add a button to return to the login page */}
               <Button variant="solid" bg='#26abcc' onClick={handleLoginClick}>
                 ΕΠΙΣΤΡΟΦΗ
               </Button>
@@ -97,77 +112,43 @@ export default function Register({ db }) {
   }
 
   return (
-      <div className='register'>
-        <form style={{ height: '600px', width: '600px' }} onSubmit={handleRegister} className='register-container'>
-          <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>ΕΓΓΡΑΦΗ</h2>
-          <Flex justifyContent='center' alignItems='center' flexDirection='row' >
-          <Image src={logo} alt="logo" marginRight="60px" width="250px"/>
-            <Flex justifyContent='center' alignItems='center' flexDirection='column'>
-              <div className='register-row'>
-                &nbsp;&nbsp;&nbsp;
-                <Input
-                  type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  variant='filled'
-                  placeholder='Email'
-                />
-              </div>
-              <div className='register-row'>
-                &nbsp;&nbsp;&nbsp;
-                <Input
-                  type='name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  variant='filled'
-                  placeholder='Ονομα'
-                />
-              </div>
-              <div className='register-row'>
-                &nbsp;&nbsp;&nbsp;
-                <Input
-                  type='surname'
-                  value={surname}
-                  onChange={(e) => setSurname(e.target.value)}
-                  variant='filled'
-                  placeholder='Επιθετο'
-                />
-              </div>
-              <div className='register-row'>
-                &nbsp;&nbsp;&nbsp;
-                <Input
-                  type='id'
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
-                  variant='filled'
-                  placeholder='ΑΜ'
-                />
-              </div>
-              <div className='register-row'>
-                &nbsp;&nbsp;&nbsp;
-                <Input
-                  type='password'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  variant='filled'
-                  placeholder='Password'
-                />
-              </div>
-          </Flex>
-          </Flex>
-          <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
-                {/* Pass onOpen as the function to be executed onClick */}
-                <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
-                  ΕΓΓΡΑΦΗ
-                </Button>
-                <a href='/login' style={{ marginTop: '20px', fontWeight: 'bold', textAlign: 'center' }} onClick={() => window.location.href = '/login'}>
-                  Έχετε ήδη λογαριασμό; Συνδεθείτε
-                </a>
-              </Flex>
-        </form>
+    <div className='register'>
+      <form style={{ height: '400px', width: '300px' }} onSubmit={handleRegister} className='register-container'>
+        <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>ΕΓΓΡΑΦΗ</h2>
+        <div className='register-row'>
+          &nbsp;&nbsp;&nbsp;
+          <Input
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            variant='filled'
+            placeholder='Email'
+          />
+        </div>
+        <div className='register-row'>
+          &nbsp;&nbsp;&nbsp;
+          <Input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            variant='filled'
+            placeholder='Password'
+          />
+        </div>
+        <Flex justifyContent='center' alignItems='center' flexDirection='column' marginTop='30px'>
+          {/* Pass onOpen as the function to be executed onClick */}
+          <Button variant='outline' color='#26abcc' borderColor='#26abcc' type='submit' onClick={onOpen}>
+            ΕΓΓΡΑΦΗ
+          </Button>
+          <a href='/login' style={{ marginTop: '20px' }} onClick={() => window.location.href = '/login'}>
+            Already have an Account?
+          </a>
+        </Flex>
+      </form>
 
-        {/* Render the AlertDialogExample component only if it is open */}
-        {isOpen && <AlertDialogExample />}
-      </div>
+      {/* Render the AlertDialogExample component only if it is open */}
+      {isOpen && <AlertDialogExample />}
+    </div>
   );
 }
+

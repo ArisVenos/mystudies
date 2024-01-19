@@ -4,9 +4,9 @@ import { Checkbox, Box, Button, Accordion, AccordionItem, AccordionButton, Accor
 
 const CourseApplication = ({ db }) => {
   const handleHistoryClick = () => {
-    // Change the window location to the desired page
-    window.location.href = "/courseshistory";
+    window.location.href = '/courseshistory';
   };
+
   const semestersData = [
     { id: 1, title: '1o ΕΞΑΜΗΝΟ' },
     { id: 2, title: '2o ΕΞΑΜΗΝΟ' },
@@ -20,50 +20,30 @@ const CourseApplication = ({ db }) => {
   const [semesters, setSemesters] = useState(semestersData);
   const [courses, setCourses] = useState([]);
   const [selectedSemester, setSelectedSemester] = useState('');
-  const [selectedCourses, setSelectedCourses] = useState('');
+  const [selectedCourses, setSelectedCourses] = useState([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // Fetch the available courses from Firestore
     const fetchCourses = async () => {
-      // You can fetch courses from Firebase based on the selected semester if needed
-      // For now, just set the initial courses
-      setCourses({
-        1: [
-          { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟ' },
-          { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ' },
-          { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ' },
-        ],
-        2: [
-          { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ' },
-          { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ' },
-          { id: 6, title: 'ΑΝΑΛΥΣΗ 1' },
-        ],
-        3: [
-            { id: 7, title: 'ΑΝΑΛΥΣΗ 2' },
-            { id: 8, title: 'ΣΗΜΑΤΑ ΚΑΙ ΣΥΣΤΗΜΑΤΑ ' },
-        ],
-        4: [
-            { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ' },
-            { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1' },
-        ],
-          5: [
-            { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ' },
-            { id: 12, title: 'ΥΛΟΠΟΙΗΣΗ ΣΥΣΤΗΜΑΤΩΝ ΒΑΣΕΩΝ ΔΕΔΟΜΕΝΩΝ' },
-          ],
-          6: [
-            { id: 13, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ' },
-            { id: 14, title: 'ΜΕΤΑΓΓΛΩΤΙΣΤΕΣ' },
-        ],
-        // Add more courses for each semester if needed
-      });
+      try {
+        const coursesCollection = collection(db, 'courses');
+        const coursesDoc = await getDoc(doc(coursesCollection, 'all_courses'));
+
+        if (coursesDoc.exists()) {
+          const allCoursesData = coursesDoc.data();
+          setCourses(allCoursesData.courses);
+        } else {
+          console.error('Courses document does not exist.');
+        }
+      } catch (error) {
+        console.error('Error fetching courses:', error.message);
+      }
     };
 
     fetchCourses();
-  }, []);
+  }, [db]);
 
   const handleCheckboxChange = (courseTitle) => {
-    // Toggle the checkbox state for the selected course
     setSelectedCourses((prevSelectedCourses) => {
       if (prevSelectedCourses.includes(courseTitle)) {
         return prevSelectedCourses.filter((course) => course !== courseTitle);
@@ -71,51 +51,48 @@ const CourseApplication = ({ db }) => {
         return [...prevSelectedCourses, courseTitle];
       }
     });
-    console.log('Selected courses:', selectedCourses);
   };
-
-
-
 
   const handleApply = async () => {
     try {
-      // Get the user email from local storage
       const userEmail = localStorage.getItem('email');
-
-      // Check if the user has already applied for the selected course
+  
       const userCoursesCollection = collection(db, 'users');
       const userCourseRef = doc(userCoursesCollection, userEmail);
-
+  
       const userCourseDoc = await getDoc(userCourseRef);
-      
+  
       if (userCourseDoc.exists()) {
         const userData = userCourseDoc.data();
         const appliedCourses = userData.courses || [];
-
-        // Check if the selected courses are already applied
+  
         const alreadyAppliedCourses = selectedCourses.filter((course) =>
-          appliedCourses.some((appliedCourse) => appliedCourse.title === course)
+          appliedCourses.some((appliedCourse) => appliedCourse.title === course && appliedCourse.declared === 1)
         );
-
+  
         if (alreadyAppliedCourses.length > 0) {
-          setMessage(`Εχεις ηδη εγγραφει για τα εξης μαθηματα: ${alreadyAppliedCourses.join(', ')}`);
+          setMessage(`Έχεις ήδη εγγραφεί για τα εξής μαθήματα: ${alreadyAppliedCourses.join(', ')}`);
           return;
         }
-
-        // Add the selected courses to the user's applied courses
+  
+        const updatedCourses = appliedCourses.map((course) =>
+          selectedCourses.includes(course.title) ? { ...course, declared: 1 } : course
+        );
+  
         await updateDoc(userCourseRef, {
-            courses: arrayUnion(...selectedCourses),
+          courses: updatedCourses,
         });
-
-        setMessage('Η αιτηση σας ηταν επιτυχης');
+  
+        setMessage('Η αίτησή σας ήταν επιτυχημένη');
       } else {
-        setMessage('User not found. Please log in again.');
+        setMessage('Χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε ξανά.');
       }
     } catch (error) {
       console.error('Error applying for course:', error.message);
-      setMessage('Error applying for course. Please try again.');
+      setMessage('Σφάλμα κατά την υποβολή αίτησης. Παρακαλώ προσπαθήστε ξανά.');
     }
   };
+  
 
   return (
     <Center>
@@ -128,15 +105,16 @@ const CourseApplication = ({ db }) => {
             <AccordionItem key={semester.id}>
               <h2>
                 <AccordionButton>
-                  <Text fontSize="2xl"  bg="#26abcc" color="white" as = "span" flex="1" textAlign="left">
+                  <Text fontSize="2xl" bg="#26abcc" color="white" as="span" flex="1" textAlign="left">
                     {semester.title}
                   </Text>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
-                <AccordionPanel pb={4}>
-                {courses[semester.id] &&
-                  courses[semester.id].map((course) => (
+              <AccordionPanel pb={4}>
+                {courses
+                  .filter((course) => course.semesterId === semester.id)
+                  .map((course) => (
                     <VStack key={course.id} align="start" spacing={2} w="100%">
                       <Checkbox
                         isChecked={selectedCourses.includes(course.title)}
@@ -147,23 +125,24 @@ const CourseApplication = ({ db }) => {
                       </Checkbox>
                     </VStack>
                   ))}
-                </AccordionPanel>
+              </AccordionPanel>
             </AccordionItem>
           ))}
         </Accordion>
-        {message && <Text color={message.includes('Η αιτηση σας ηταν επιτυχης') ? 'green.500' : 'red.500'}>{message}</Text>}
+        {message && <Text color={message.includes('Η αίτησή σας ήταν επιτυχημένη') ? 'green.500' : 'red.500'}>{message}</Text>}
         <Button colorScheme="teal" onClick={handleApply} disabled={selectedCourses.length === 0}>
           ΔΗΛΩΣΗ
         </Button>
       </VStack>
-      <Box bg="#26abcc"  borderBottom="4px solid #4f4f50" position="absolute" top={210} left={20}>
-        <Button bg="#26abcc" color="white" onClick={handleHistoryClick} >
+      <Box bg="#26abcc" borderBottom="4px solid #4f4f50" position="absolute" top={210} left={20}>
+        <Button bg="#26abcc" color="white" onClick={handleHistoryClick}>
           ΙΣΤΟΡΙΚΟ ΔΗΛΩΣΕΩΝ
         </Button>
-      </Box> 
+      </Box>
     </Center>
   );
 };
 
 export default CourseApplication;
+
 
