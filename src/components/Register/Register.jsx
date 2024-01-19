@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, collection, getDoc } from 'firebase/firestore';
 import { Button, Input, Flex, useDisclosure , Image } from '@chakra-ui/react';
 import logo from "./logo.png";
 import {
@@ -55,18 +55,25 @@ export default function Register({ db }) {
 
 
     try {
+      // Log to check if the function is being called
+      console.log('handleRegister function called');
+  
+      // Log the userCourses to check if it contains the expected data
+      console.log('userCourses:', userCourses);
+  
       // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key as the email of the user
       const ref_user = doc(db, 'users', email);
       const res_user = await setDoc(ref_user, docUser);
-
-      // At the same time, we push all the courses to the db.
-      // We create a 'courses' collection with primary key 'all_courses'
-      const ref_courses = doc(db, 'courses', 'all_courses');
-      const res_courses = await setDoc(ref_courses, { courses: userCourses });
-
+      console.log('User document created successfully');
+  
+      // Create or update the 'all_courses' document with userCourses
+      const ref_all_courses = doc(db, 'courses', 'all_courses');
+      const res_all_courses = await setDoc(ref_all_courses, { courses: userCourses });
+      console.log('Courses document created or updated successfully');
+  
       onOpen();
-    } catch (e) {
-      console.log(e);
+    }  catch (e) {
+      console.error('Error during registration:', e.message);
     }
   }
 
