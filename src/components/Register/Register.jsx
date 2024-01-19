@@ -65,7 +65,7 @@ export default function Register({ db }) {
       // At the same time, we push all the courses to the db.
       // We create a 'courses' collection with primary key 'all_courses'
       const ref_courses = doc(db, 'courses', 'all_courses');
-      const res_courses = await setDoc(ref_courses, courses);
+      const res_courses = await setDoc(ref_courses, { courses: userCourses });
 
       onOpen();
     } catch (e) {
