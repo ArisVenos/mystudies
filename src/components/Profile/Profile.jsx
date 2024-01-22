@@ -60,19 +60,24 @@ const Profile = ({ db}) => {
             <Table variant="striped" bg="#26abcc">
               <Tbody>
                 <Tr>
-                  <Td>Ονομα: {userData.name}</Td>
+                  <Td textAlign="left">Ονομα:</Td>
+                  <Td textAlign="right">{userData.name}</Td>
                 </Tr>
                 <Tr>
-                  <Td>Επίθετο: {userData.surname}</Td>
+                  <Td textAlign="left">Επίθετο:</Td>
+                  <Td textAlign="right">{userData.surname}</Td>
                 </Tr>
                 <Tr>
-                  <Td>Αριθμός μητρώου: {userData.id}</Td>
+                  <Td textAlign="left">Αριθμός μητρώου:</Td>
+                  <Td textAlign="right">{userData.id}</Td>
                 </Tr>
                 <Tr>
-                  <Td>Role: {userData.role}</Td>
+                  <Td textAlign="left">Role:</Td>
+                  <Td textAlign="right">{userData.role}</Td>
                 </Tr>
                 <Tr>
-                  <Td>Email: {userData.email}</Td>
+                  <Td textAlign="left">Email:</Td>
+                  <Td textAlign="right">{userData.email}</Td>
                 </Tr>
               </Tbody>
             </Table>
