@@ -174,7 +174,7 @@ export default function Register({ db }) {
                 ΕΓΓΡΑΦΗ
               </Button>
               <a href='/login' style={{ marginTop: '20px', fontWeight: 'bold', textAlign: 'center' }} onClick={() => window.location.href = '/login'}>
-                Έχετε ήδη λογαριασμό; Συνδεθείτε
+                Έχετε ήδη λογαριασμό; Συνδεθείτε!
               </a>
             </Flex>
       </form>
