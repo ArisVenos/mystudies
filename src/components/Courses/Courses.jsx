@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Checkbox, Box, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, VStack, Center } from '@chakra-ui/react';
+import { Checkbox, Box, Flex, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, VStack, Center } from '@chakra-ui/react';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+} from '@chakra-ui/react';
 
-const CourseApplication = ({ db }) => {
+const CourseApplication = ({ db, userCourses }) => {
   const handleHistoryClick = () => {
     window.location.href = '/courseshistory';
   };
@@ -22,6 +31,8 @@ const CourseApplication = ({ db }) => {
   const [selectedSemester, setSelectedSemester] = useState('');
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [message, setMessage] = useState('');
+  const [selectedCourseInfo, setSelectedCourseInfo] = useState(null);
+  const [isCourseInfoModalOpen, setIsCourseInfoModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -51,6 +62,17 @@ const CourseApplication = ({ db }) => {
         return [...prevSelectedCourses, courseTitle];
       }
     });
+  };
+
+  const handleCourseInfoButtonClick = (courseInfo) => {
+    setSelectedCourseInfo(courseInfo);
+    setIsCourseInfoModalOpen(true);
+    // Open modal or pop-up here
+  };
+
+  const handleCloseCourseInfoModal = () => {
+    setSelectedCourseInfo(null);
+    setIsCourseInfoModalOpen(false);
   };
 
   const handleApply = async () => {
@@ -112,20 +134,25 @@ const CourseApplication = ({ db }) => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                {courses
-                  .filter((course) => course.semesterId === semester.id)
-                  .map((course) => (
-                    <VStack key={course.id} align="start" spacing={2} w="100%">
+              {courses
+                .filter((course) => course.semesterId === semester.id)
+                .map((course) => (
+                  <Flex key={course.id} align="start" justify="space-between" w="100%">
+                    <VStack spacing={2} w="80%" align="start">
                       <Checkbox
                         isChecked={selectedCourses.includes(course.title)}
                         onChange={() => handleCheckboxChange(course.title)}
                       >
-                        {console.log('Is checked:', selectedCourses.includes(course.title))}
                         {course.title}
                       </Checkbox>
                     </VStack>
-                  ))}
-              </AccordionPanel>
+                    <Button  size="xs" fontSize ='1.5rem' borderRadius ='10' bg="#26abcc" color="white" 
+                      onClick={() => handleCourseInfoButtonClick(course)}>
+                      i
+                    </Button>
+                  </Flex>
+                ))}
+            </AccordionPanel>
             </AccordionItem>
           ))}
         </Accordion>
@@ -139,10 +166,36 @@ const CourseApplication = ({ db }) => {
           ΙΣΤΟΡΙΚΟ ΔΗΛΩΣΕΩΝ
         </Button>
       </Box>
+      <Modal isOpen={isCourseInfoModalOpen} onClose={handleCloseCourseInfoModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader background='#26abcc' color='white'>
+            Πληροφορίες Μαθήματος
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {/* Display course information here using selectedCourseInfo */}
+            {selectedCourseInfo && (
+              <>
+                <Text>Εξάμηνο: {selectedCourseInfo.semesterId}</Text>
+                <Text>Τύπος: {selectedCourseInfo.type}</Text>
+                <Text>Διδάσκων: {selectedCourseInfo.prof}</Text>
+                <Text>Βαθμός βάσης: {selectedCourseInfo.basegrade}</Text>
+                <Text>Διδακτικές μονάδες: {selectedCourseInfo.ects}</Text>
+                <Text>Υπολογίζεται στο βαθμό πτυχίου: {selectedCourseInfo.calculated}</Text>
+              </>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="teal" onClick={handleCloseCourseInfoModal}>
+              Κλείσιμο
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Center>
   );
 };
 
 export default CourseApplication;
-
 

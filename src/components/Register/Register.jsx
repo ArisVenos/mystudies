@@ -13,6 +13,22 @@ import {
 } from '@chakra-ui/react';
 import './Register.css';
 
+const userCourses = [
+  { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Παναγιώτης Σταματόπουλος' },
+  { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Πασχάλης' },
+  { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Νικόλαος Ράπτης' },
+  { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 8, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χατζηκοκολάκης' },
+  { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Γκιζόπουλος' },
+  { id: 6, title: 'ΑΝΑΛΥΣΗ 1', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Δοδός' },
+  { id: 7, title: 'ΑΝΑΛΥΣΗ 2', grade: -1, declared: -1, semesterId: 3, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 8, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χελιώτης' },
+  { id: 8, title: 'ΣΗΜΑΤΑ ΚΑΙ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 3, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Λουκά' },
+  { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ', grade: -1, declared: -1, semesterId: 4, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Ζησιμόπουλος' },
+  { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1', grade: -1, declared: -1, semesterId: 4, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 4, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Δεν θυμάμαι' },
+  { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 5, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χατζηευθυμιάδης' },
+  { id: 12, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ', grade: -1, declared: -1, semesterId: 6, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Ρουσουπούλου' },
+  // Add other courses with appropriate semesterId
+];
+
 export default function Register({ db }) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -21,21 +37,7 @@ export default function Register({ db }) {
   const [password, setPassword] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const userCourses = [
-    { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ', grade: -1, declared: -1, semesterId: 1 },
-    { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ', grade: -1, declared: -1, semesterId: 1 },
-    { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', grade: -1, declared: -1, semesterId: 1 },
-    { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ', grade: -1, declared: -1, semesterId: 2 },
-    { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ', grade: -1, declared: -1, semesterId: 2 },
-    { id: 6, title: 'ΑΝΑΛΥΣΗ 1', grade: -1, declared: -1, semesterId: 2 },
-    { id: 7, title: 'ΑΝΑΛΥΣΗ 2', grade: -1, declared: -1, semesterId: 3 },
-    { id: 8, title: 'ΣΗΜΑΤΑ ΚΑΙ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 3 },
-    { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ', grade: -1, declared: -1, semesterId: 4 },
-    { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1', grade: -1, declared: -1, semesterId: 4 },
-    { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 5 },
-    { id: 12, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ', grade: -1, declared: -1, semesterId: 6 },
-    // Add other courses with appropriate semesterId
-  ];
+  
 
   const docUser = {
     name: name,
