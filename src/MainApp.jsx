@@ -11,6 +11,7 @@ import CertificatesList from './components/Certificates/CertificatesList.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import Courses from './components/Courses/Courses.jsx';
 import CoursesHistory from './components/Courses/CoursesHistory.jsx';
+import Grades from './components/Grades/Grades.jsx';
 
 import { firebaseConfig } from './config';
 import { initializeApp } from 'firebase/app';
@@ -35,6 +36,7 @@ function MainApp() {
                         <Route path="/certificates" element={<Certificates db={db} />} />
                         <Route path="/register" element={<Register db={db} />} />
                         <Route path="/profile" element={<Profile db={db}/>} />
+                        <Route path="/grades" element={<Grades db={db}/>} />
                     </Routes>
                 </BrowserRouter>
             </GridItem>
