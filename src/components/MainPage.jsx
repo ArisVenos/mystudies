@@ -14,10 +14,9 @@ const Mainpage = () => {
         window.location.href = "/login";
     };
 
-    const handleCertificateClick = () => {
-        // Change the window location to the desired page
-        window.location.href = "/certificates";
-    };
+    const name = localStorage.getItem("name");
+
+    const isLoggedIn = localStorage.getItem("role") == null;
     
     return (
         <Flex justifyContent="center" alignItems="center" flexDirection="column" bgImage={bg} bgSize="cover" bgPosition="center" bgRepeat="no-repeat">
@@ -29,79 +28,107 @@ const Mainpage = () => {
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div className="carousel-item active">
-                        <Image src={book} className="d-block w-100" alt="First slide" style={{ objectFit: 'cover', height: '500px' }} />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h3 style={{color: 'white' , fontWeight: 'bold'}}>ΔΗΛΩΣΕΙΣ</h3>
-                            <p style={{color: 'white', fontWeight: 'bold'}}>Δηλώστε τα μαθήματα σας για το τρέχον εξάμηνο.</p>
-                        </div>
+                        <a href="/courses">
+                            <Image src={book} className="d-block w-100" alt="First slide" style={{ objectFit: 'cover', height: '500px' }} />
+                            <div className="carousel-caption d-none d-md-block">
+                                <h3 style={{color: 'white' , fontWeight: 'bold'}}>ΔΗΛΩΣΕΙΣ</h3>
+                                <p style={{color: 'white', fontWeight: 'bold'}}>Δηλώστε τα μαθήματα σας για το τρέχον εξάμηνο.</p>
+                            </div>
+                        </a>
                     </div>
                     <div className="carousel-item">
-                        <Image src={grade} className="d-block w-100" alt="Second slide" style={{ objectFit: 'cover', height: '500px' }} />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h3 style={{color: 'black' , fontWeight: 'bold'}}>ΒΑΘΜΟΛΟΓΙΕΣ</h3>
-                            <p style={{color: 'black' , fontWeight: 'bold'}}>Δείτε τις βαθμολογίες σας για τα μαθήματα που έχετε εξεταστεί.</p>
-                        </div>
+                        <a href="/grades">
+                            <Image src={grade} className="d-block w-100" alt="Second slide" style={{ objectFit: 'cover', height: '500px' }} />
+                            <div className="carousel-caption d-none d-md-block">
+                                <h3 style={{color: 'black' , fontWeight: 'bold'}}>ΒΑΘΜΟΛΟΓΙΕΣ</h3>
+                                <p style={{color: 'black' , fontWeight: 'bold'}}>Δείτε τις βαθμολογίες σας για τα μαθήματα που έχετε εξεταστεί.</p>
+                            </div>
+                        </a>
                     </div>
                     <div className="carousel-item">
-                        <Image src={certificate} className="d-block w-100" alt="Second slide" style={{ objectFit: 'cover', height: '500px' }} />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h3 style={{color: 'black' , fontWeight: 'bold'}}>ΠΙΣΤΟΠΟΙΗΤΙΚΑ</h3>
-                            <p style={{color: 'black' , fontWeight: 'bold'}}>Κάντε αίτηση πιστοποιητικών για τις σπουδές σας.</p>
-                        </div>
+                        <a href="/certificateslist">
+                            <Image src={certificate} className="d-block w-100" alt="Second slide" style={{ objectFit: 'cover', height: '500px' }} />
+                            <div className="carousel-caption d-none d-md-block">
+                                <h3 style={{color: 'black' , fontWeight: 'bold'}}>ΠΙΣΤΟΠΟΙΗΤΙΚΑ</h3>
+                                <p style={{color: 'black' , fontWeight: 'bold'}}>Κάντε αίτηση πιστοποιητικών για τις σπουδές σας.</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style={{ backgroundColor: 'grey' , height: "500px" , width: "50px"}}>
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <button className="carousel-control-next" type="button"  data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style={{ backgroundColor: 'grey' , height: "500px" , width: "50px"}}>
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
-            <div style={{marginBottom: '40px'}}>
-                <Flex >
-                    <Card marginRight="50px" style={{ width: '400px'}}>
-                        <CardHeader>
-                        <Heading size='md'> Για τους φοιτητές/τριες:</Heading>
-                        </CardHeader>
-                        <CardBody>
-                        <Text>	
-                            • Να δουν το Πρόγραμμα Σπουδών του Τμήματός τους
-                        </Text>
-                        <Text>
-                            • Να κάνουν δήλωση μαθημάτων
-                        </Text>
-                        <Text>
-                            • Να δουν τη βαθμολογία τους
-                        </Text>
-                        <Text>
-                            • Να κάνουν αίτηση για την έκδοση πιστοποιητικών
-                        </Text>
-                        </CardBody>
-                        <CardFooter>
-                        <Button bg="#26abcc" color="white" onClick={handleLoginClick} >ΣΥΝΔΕΣΗ</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card marginRight="100px" style={{ width: '400px'}}>
-                        <CardHeader>
-                        <Heading size='md'> Για τους καθηγητές/τριες:</Heading>
-                        </CardHeader>
-                        <CardBody>
+            {isLoggedIn ? ( 
+                <div style={{marginBottom: '40px'}}>
+                    <Flex >
+                        <Card marginRight="50px" style={{ width: '400px'}}>
+                            <CardHeader>
+                            <Heading size='md'> Για τους φοιτητές/τριες:</Heading>
+                            </CardHeader>
+                            <CardBody>
                             <Text>	
-                                • Να δημιουργήσουν νέο βαθμολόγιο
+                                • Να δουν το Πρόγραμμα Σπουδών του Τμήματός τους
                             </Text>
                             <Text>
-                                • Να επεξεργαστούν και να οριστικοποιήσουν τα βαθμολογία τους
+                                • Να κάνουν δήλωση μαθημάτων
                             </Text>
-                        </CardBody>
-                        <CardFooter>
-                        <Button bg="#26abcc" color="white" onClick={handleLoginClick}>ΣΥΝΔΕΣΗ</Button>
-                        </CardFooter>
-                    </Card>
-                </Flex>
-            </div>
-        </Flex>
+                            <Text>
+                                • Να δουν τη βαθμολογία τους
+                            </Text>
+                            <Text>
+                                • Να κάνουν αίτηση για την έκδοση πιστοποιητικών
+                            </Text>
+                            </CardBody>
+                            <CardFooter>
+                            <Button bg="#26abcc" color="white" onClick={handleLoginClick} >ΣΥΝΔΕΣΗ</Button>
+                            </CardFooter>
+                        </Card>
+                        <Card marginRight="100px" style={{ width: '400px'}}>
+                            <CardHeader>
+                            <Heading size='md'> Για τους καθηγητές/τριες:</Heading>
+                            </CardHeader>
+                            <CardBody>
+                                <Text>	
+                                    • Να δημιουργήσουν νέο βαθμολόγιο
+                                </Text>
+                                <Text>
+                                    • Να επεξεργαστούν και να οριστικοποιήσουν τα βαθμολογία τους
+                                </Text>
+                            </CardBody>
+                            <CardFooter>
+                            <Button bg="#26abcc" color="white" onClick={handleLoginClick}>ΣΥΝΔΕΣΗ</Button>
+                            </CardFooter>
+                        </Card>
+                    </Flex>
+                </div>
+            ) : (
+                <Card style={{ marginBottom: '30px', width: '1000px'}}>
+                    <CardHeader>
+                    <Heading size='md'> Καλησπέρα {name}. Στο mystudies μπορείς:</Heading>
+                    </CardHeader>
+                    <CardBody>
+                    <Text>	
+                        • Να δεις το Πρόγραμμα Σπουδών του Τμήματός 
+                    </Text>
+                    <Text>
+                        • Να κάνεις δήλωση μαθημάτων
+                    </Text>
+                    <Text>
+                        • Να δεις τη βαθμολογία σου
+                    </Text>
+                    <Text>
+                        • Να κάνεις αίτηση για την έκδοση πιστοποιητικών
+                    </Text>
+                    </CardBody>
+                </Card>
+                )}
+            </Flex>    
     );
 }
 

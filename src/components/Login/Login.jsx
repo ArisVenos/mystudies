@@ -27,6 +27,7 @@ export default function Login({db}){
             // Store the email and role as keys in your browser local storage
             localStorage.setItem('role', user_role)
             localStorage.setItem('email', user_email)
+            localStorage.setItem('name', res.data().name)
 
             // Go to page /courses
             window.location.href = './index.html'
