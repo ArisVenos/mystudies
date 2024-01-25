@@ -35,7 +35,12 @@ const NavBar = () => {
   const handleGradesClick = () => {
     // Change the window location to the desired page
     window.location.href = "/grades";
-  }; 
+  };
+
+  const handleHelpClick = () => {
+    // Change the window location to the desired page
+    window.location.href = "/help";
+  };
 
   return (
     <div>
@@ -66,7 +71,7 @@ const NavBar = () => {
         <Button bg="#26abcc" color="white" onClick={handleCertificateClick} marginRight="20px">
           ΠΙΣΤΟΠΟΙΗΤΙΚΑ
         </Button>
-        <Button bg="#26abcc" color="white">
+        <Button bg="#26abcc" color="white" onClick={handleHelpClick}>
           ΒΟΗΘΕΙΑ
         </Button>
       </HStack>
