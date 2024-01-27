@@ -42,7 +42,7 @@ const Grades = ({ db, userEmail }) => {
   }, {});
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" height="90vh">
       <Heading mb={4} margin="20px">
         ΒΑΘΜΟΛΟΓΙΕΣ
       </Heading>
@@ -51,29 +51,33 @@ const Grades = ({ db, userEmail }) => {
         const hasGrades = courses.some((course) => course.grade !== -1);
 
         // Render the semester only if there are courses with grades
-        return hasGrades ? (
-          <div key={semesterId} style={{ marginBottom: '20px' }}>
+        return (
+          <div key={semesterId} style={{ marginBottom: '20px' , height: "100vh"}}>
             <Heading as="h2" size="md" mb={2} color="#26abcc">
               {`ΕΞΑΜΗΝΟ ${semesterId}`}
             </Heading>
-            <Table variant="striped" bg="#26abcc" width="600px">
-              <Tbody>
-                <Tr bg="white">
-                  <Th>ΜΑΘΗΜΑ</Th>
-                  <Th>ΒΑΘΜΟΣ</Th>
-                </Tr>
-                {courses
-                  .filter((course) => course.grade !== -1)
-                  .map((course) => (
-                    <Tr key={course.id}>
-                      <Td>{course.title}</Td>
-                      <Td>{course.grade}</Td>
-                    </Tr>
-                  ))}
-              </Tbody>
-            </Table>
+            {hasGrades ? (
+              <Table variant="striped" width="600px" border="2px">
+                <Tbody>
+                  <Tr bg="#26abcc">
+                    <Th><strong>ΜΑΘΗΜΑ</strong></Th>
+                    <Th style={{ textAlign: 'right' }}><strong>ΒΑΘΜΟΣ</strong></Th>
+                  </Tr>
+                  {courses
+                    .filter((course) => course.grade !== -1)
+                    .map((course) => (
+                      <Tr key={course.id}>
+                        <Td>{course.title}</Td>
+                        <Td style={{ color: course.grade > 5 ? 'green' : 'red', textAlign: 'right' }}> <strong>{course.grade}</strong></Td>
+                      </Tr>
+                    ))}
+                </Tbody>
+              </Table>
+            ) : (
+              <Text border="2px" margin="10px">Δεν έχετε κάποιο βαθμό σε αυτό το εξάμηνο</Text>
+            )}
           </div>
-        ) : null;
+        );
       })}
     </Flex>
   );
