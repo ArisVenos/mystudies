@@ -68,13 +68,13 @@ const Grades = ({ db, userEmail }) => {
                     .map((course) => (
                       <Tr key={course.id}>
                         <Td>{course.title}</Td>
-                        <Td style={{ color: course.grade > 5 ? 'green' : 'red', textAlign: 'right' }}> <strong>{course.grade}</strong></Td>
+                        <Td style={{ color: course.grade > 4 ? 'green' : 'red', textAlign: 'right' }}> <strong>{course.grade}</strong></Td>
                       </Tr>
                     ))}
                 </Tbody>
               </Table>
             ) : (
-              <Text border="2px" margin="10px">Δεν έχετε κάποιο βαθμό σε αυτό το εξάμηνο</Text>
+              <Text margin="10px"><strong>Δεν έχετε κάποιο βαθμό σε αυτό το εξάμηνο</strong></Text>
             )}
           </div>
         );
