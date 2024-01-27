@@ -62,6 +62,37 @@ const AppliedCoursesList = ({ db }) => {
         });
   
         console.log(`Course with title "${courseTitle}" re-applied with declared -1.`);
+
+        // Fetch the 'courses/all_courses' document
+        const allCoursesCollection = collection(db, 'courses');
+        const allCoursesRef = doc(allCoursesCollection, 'all_courses');
+        const allCoursesDoc = await getDoc(allCoursesRef);
+
+        if (allCoursesDoc.exists()) {
+          const allCoursesData = allCoursesDoc.data();
+          const allCourses = allCoursesData.courses || [];
+        
+          // Find the course with the specified title
+          const courseToUpdate = allCourses.find(course => course.title === courseTitle);
+        
+          if (courseToUpdate) {
+            // Remove the user from the declaredUsers array of the specific course
+            const updatedDeclaredUsers = courseToUpdate.declaredUsers.filter(user => user !== userEmail);
+        
+            // Update the course with the updated declaredUsers array
+            const updatedCourse = { ...courseToUpdate, declaredUsers: updatedDeclaredUsers };
+        
+            // Replace the course in the allCourses array
+            const updatedAllCourses = allCourses.map(course => course.title === courseTitle ? updatedCourse : course);
+        
+            // Update the 'courses/all_courses' document with the updated allCourses array
+            await updateDoc(allCoursesRef, {
+              courses: updatedAllCourses,
+            });
+        
+            console.log(`User "${userEmail}" removed from declared users of course "${courseTitle}".`);
+          }
+        }
       } else {
         console.log(`Course with title "${courseTitle}" not found in declared courses.`);
       }

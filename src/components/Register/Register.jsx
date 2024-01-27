@@ -14,18 +14,18 @@ import {
 import './Register.css';
 
 const userCourses = [
-  { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Παναγιώτης Σταματόπουλος' },
-  { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Πασχάλης' },
-  { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Νικόλαος Ράπτης' },
-  { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 8, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χατζηκοκολάκης' },
-  { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Γκιζόπουλος' },
-  { id: 6, title: 'ΑΝΑΛΥΣΗ 1', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Δοδός' },
-  { id: 7, title: 'ΑΝΑΛΥΣΗ 2', grade: -1, declared: -1, semesterId: 3, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 8, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χελιώτης' },
+  { id: 1, title: 'ΕΙΣΑΓΩΓΗ ΣΤΟΝ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Παναγιώτης Σταματόπουλος', declaredUsers: [] },
+  { id: 2, title: 'ΛΟΓΙΚΗ ΣΧΕΔΙΑΣΗ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Πασχάλης', declaredUsers: []},
+  { id: 3, title: 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', grade: -1, declared: -1, semesterId: 1, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Νικόλαος Ράπτης', declaredUsers: []},
+  { id: 4, title: 'ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 8, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χατζηκοκολάκης', declaredUsers: []},
+  { id: 5, title: 'ΑΡΧΙΤΕΚΤΟΝΙΚΗ', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Γκιζόπουλος', declaredUsers: []},
+  { id: 6, title: 'ΑΝΑΛΥΣΗ 1', grade: -1, declared: -1, semesterId: 2, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Δοδός', declaredUsers: []},
+  { id: 7, title: 'ΑΝΑΛΥΣΗ 2', grade: -1, declared: -1, semesterId: 3, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 8, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χελιώτης', declaredUsers: []},
   { id: 8, title: 'ΣΗΜΑΤΑ ΚΑΙ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 3, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 6, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Λουκά' },
-  { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ', grade: -1, declared: -1, semesterId: 4, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Ζησιμόπουλος' },
-  { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1', grade: -1, declared: -1, semesterId: 4, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 4, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Δεν θυμάμαι' },
-  { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 5, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χατζηευθυμιάδης' },
-  { id: 12, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ', grade: -1, declared: -1, semesterId: 6, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Ρουσουπούλου' },
+  { id: 9, title: 'ΑΛΓΟΡΙΘΜΟΙ ΚΑΙ ΠΟΛΥΠΛΟΚΟΤΗΤΑ', grade: -1, declared: -1, semesterId: 4, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Ζησιμόπουλος', declaredUsers: []},
+  { id: 10, title: 'ΔΙΚΤΥΑ ΕΠΙΚΟΙΝΩΝΙΩΝ 1', grade: -1, declared: -1, semesterId: 4, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 4, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Δεν θυμάμαι', declaredUsers: []},
+  { id: 11, title: 'ΛΕΙΤΟΥΡΓΙΚΑ ΣΥΣΤΗΜΑΤΑ', grade: -1, declared: -1, semesterId: 5, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Χατζηευθυμιάδης', declaredUsers: []},
+  { id: 12, title: 'ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΣΥΣΤΗΜΑΤΟΣ', grade: -1, declared: -1, semesterId: 6, type: 'ΥΠΟΧΡΕΩΤΙΚΟ', ects: 7, basegrade: 5, calculated : 'ΝΑΙ', prof: 'Ρουσουπούλου', declaredUsers: []},
   // Add other courses with appropriate semesterId
 ];
 
@@ -71,10 +71,20 @@ export default function Register({ db }) {
       const res_user = await setDoc(ref_user, docUser);
       console.log('User document created successfully');
   
-      // Create or update the 'all_courses' document with userCourses
+      // Create a reference to the 'all_courses' document
       const ref_all_courses = doc(db, 'courses', 'all_courses');
-      const res_all_courses = await setDoc(ref_all_courses, { courses: userCourses });
-      console.log('Courses document created or updated successfully');
+
+      // Fetch the 'all_courses' document
+      const all_courses_doc = await getDoc(ref_all_courses);
+
+      // Check if the 'all_courses' document exists
+      if (!all_courses_doc.exists()) {
+        // If the 'all_courses' document doesn't exist, create it with userCourses
+        const res_all_courses = await setDoc(ref_all_courses, { courses: userCourses });
+        console.log('Courses document created successfully');
+      } else {
+        console.log('Courses document already exists');
+      }
   
       onOpen();
     }  catch (e) {
@@ -185,4 +195,4 @@ export default function Register({ db }) {
       {isOpen && <AlertDialogExample />}
     </div>
 );
-} 
+}

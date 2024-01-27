@@ -109,6 +109,34 @@ const CourseApplication = ({ db, userCourses }) => {
       } else {
         setMessage('Ο χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε ξανά.');
       }
+
+      // Update the courses/all_courses document
+      const coursesCollection = collection(db, 'courses');
+      const allCoursesRef = doc(coursesCollection, 'all_courses');
+      const allCoursesDoc = await getDoc(allCoursesRef);
+
+      if (allCoursesDoc.exists()) {
+        const allCoursesData = allCoursesDoc.data();
+        const allCourses = allCoursesData.courses || [];
+
+        const updatedAllCourses = allCourses.map((course) => {
+          if (selectedCourses.includes(course.title)) {
+            const declaredUsers = course.declaredUsers || [];
+            declaredUsers.push(userEmail);
+            return { ...course, declaredUsers };
+          } else {
+            return course;
+          }
+        });
+
+        await updateDoc(allCoursesRef, {
+          courses: updatedAllCourses,
+        });
+      } else {
+        console.error('Courses document does not exist.');
+      }
+
+
     } catch (error) {
       console.error('Error applying for course:', error.message);
       setMessage('Σφάλμα κατά την υποβολή αίτησης. Παρακαλώ προσπαθήστε ξανά.');
