@@ -93,7 +93,7 @@ const CourseApplication = ({ db, userCourses }) => {
         );
   
         if (alreadyAppliedCourses.length > 0) {
-          setMessage(`Έχεις ήδη εγγραφεί για τα εξής μαθήματα: ${alreadyAppliedCourses.join(', ')}`);
+          setMessage(`Έχετε ήδη εγγραφεί για τα εξής μαθήματα: ${alreadyAppliedCourses.join(', ')}`);
           return;
         }
   
@@ -107,7 +107,7 @@ const CourseApplication = ({ db, userCourses }) => {
   
         setMessage('Η αίτησή σας ήταν επιτυχημένη');
       } else {
-        setMessage('Χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε ξανά.');
+        setMessage('Ο χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε ξανά.');
       }
     } catch (error) {
       console.error('Error applying for course:', error.message);

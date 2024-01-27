@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc } from 'firebase/firestore';
-import { Button, Spacer, Box, Text, VStack, Center, HStack } from '@chakra-ui/react';
+import { Button, Spacer, Box, Text, VStack, Center, HStack, useToast } from '@chakra-ui/react';
+import { FaPrint } from 'react-icons/fa';
 
 const AppliedCertificatesList = ({ db }) => {
+  const toast = useToast();
+
   const handleNewClick = () => {
     // Change the window location to the desired page
     window.location.href = "/certificates";
   };
+
   const [appliedCertificates, setAppliedCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [printingSuccess, setPrintingSuccess] = useState(false);
 
   useEffect(() => {
     // Get the user email from local storage
@@ -37,6 +42,20 @@ const AppliedCertificatesList = ({ db }) => {
     fetchAppliedCertificates();
   }, [db]);
 
+  const handlePrintClick = () => {
+    setTimeout(() => {
+      setPrintingSuccess(true);
+
+      toast({
+        title: 'Επιτυχής εκτύπωση',
+        description: 'Το πιστοποιητικό εκτυπώθηκε επιτυχώς.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    }, 1000);
+  };
+
   return (
     <Center>
       <VStack marginRight="200px" align="start" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
@@ -45,7 +64,7 @@ const AppliedCertificatesList = ({ db }) => {
             ΑΙΤΗΣΕΙΣ
           </Text>
           <Spacer />
-          <Text fontSize="2xl" fontWeight="bold" mb={2} bg="#26abcc" color="white" >
+          <Text fontSize="2xl" fontWeight="bold" mb={2} bg="#26abcc" color="white" width="32%" >
             ΚΑΤΑΣΤΑΣΗ
           </Text>
         </HStack>
@@ -58,7 +77,11 @@ const AppliedCertificatesList = ({ db }) => {
             {appliedCertificates.map((certificate, index) => (
                 <Box key={index} borderWidth="2px" borderRadius="md" p={2} w="150%" display="flex" justifyContent="space-between">
                   <Text fontSize="2xl" fontWeight="bold">{certificate.title}</Text>
+                  <Spacer />
                   <Text fontSize="2xl" fontWeight="bold">{certificate.status}</Text>
+                  <Button size="xs" h="28px" borderRadius="10" colorScheme="teal" leftIcon={<FaPrint />} onClick={handlePrintClick}>
+                    
+                  </Button>
                 </Box>
             ))}
           </VStack>
@@ -75,64 +98,3 @@ const AppliedCertificatesList = ({ db }) => {
 
 export default AppliedCertificatesList;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CertificateList.jsx
-/*import React, { useState } from 'react';
-import { VStack, Text, Badge } from '@chakra-ui/react';
-
-const CertificateList = () => {
-  // Sample data for certificates and their statuses
-  const certificateData = [
-    { id: 1, title: 'ΣΙΤΙΣΗ', status: 'approved' },
-    { id: 2, title: 'ΠΤΥΧΙΟ', status: 'pending' },
-    { id: 3, title: 'ΠΑΥΣΗ ΣΠΟΥΔΩΝ', status: 'disapproved' },
-    // Add more certificates and their statuses as needed
-  ];
-
-  return (
-    <VStack align="start" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" mt={4}>
-      <Text fontSize="2xl" fontWeight="bold" mb={4}>
-        Λίστα Αιτήσεων Πιστοποιητικών
-      </Text>
-      {certificateData.map((certificate) => (
-        <VStack key={certificate.id} align="start" spacing={1} p={2} bgColor="gray.100" borderRadius="md" w="100%">
-          <Text fontSize="lg" fontWeight="bold">
-            {certificate.title}
-          </Text>
-          <Badge colorScheme={getStatusColor(certificate.status)}>{certificate.status}</Badge>
-        </VStack>
-      ))}
-    </VStack>
-  );
-};
-
-// Helper function to determine the color of the status badge
-const getStatusColor = (status) => {
-  switch (status) {
-    case 'approved':
-      return 'green';
-    case 'disapproved':
-      return 'red';
-    case 'pending':
-      return 'gray';
-    default:
-      return 'gray';
-  }
-};
-
-export default CertificateList;*/

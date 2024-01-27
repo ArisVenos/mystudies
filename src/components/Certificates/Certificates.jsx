@@ -1,10 +1,15 @@
 // CertificateApplication.jsx
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Button, FormControl, FormLabel, Select, Text, VStack, Center } from '@chakra-ui/react';
+import { Button, Box, FormControl, FormLabel, Select, Text, VStack, Center } from '@chakra-ui/react';
 
 
   const CertificateApplication = ({ db }) => {
+
+    const handleCertificateClick = () => {
+      window.location.href = '/certificateslist';
+    };
+
     const certificatesData = [
       { id: 1, title: 'ΣΙΤΙΣΗ' },
       { id: 2, title: 'ΠΤΥΧΙΟ' },
@@ -43,7 +48,7 @@ import { Button, FormControl, FormLabel, Select, Text, VStack, Center } from '@c
   
           // Check if the selected certificate is already applied
           if (appliedCertificates.some(cert => cert.title === selectedCertificate)) {
-            setMessage('Εχεις αιτηθει ηδη γιαυτο το πιστοποιητικο.');
+            setMessage('Έχετε ήδη αιτηθεί για αυτό το πιστοποιητικό.');
             return;
           }
   
@@ -52,27 +57,27 @@ import { Button, FormControl, FormLabel, Select, Text, VStack, Center } from '@c
             certificates: arrayUnion({ title: selectedCertificate, status: 'ΣΕ ΕΚΚΡΕΜΟΤΗΤΑ' }),
           });
   
-          setMessage('Η αιτηση σας ηταν επιτυχης');
+          setMessage('Η αίτησή σας ήταν επιτυχής');
         } else {
-          setMessage('User not found. Please log in again.');
+          setMessage('Ο χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε.');
         }
       } catch (error) {
         console.error('Error applying for certificate:', error.message);
-        setMessage('Error applying for certificate. Please try again.');
+        setMessage('Σφάλμα κατά την υποβολή αίτησης. Παρακαλώ προσπαθήστε ξανά.');
       }
     };
 
 
   return (
     <Center>
-      <VStack align="start" spacing={4}  p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
-        <Text fontSize="2xl" fontWeight="bold" bg="#26abcc" color="white" mb={4}>
+      <VStack align="start" spacing={4}  p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="500px" mt={100}>
+        <Text fontSize="2xl" fontWeight="bold" bg="#26abcc" color="white" p={2} borderRadius="md">
           ΝΕΑ ΑΙΤΗΣΗ
         </Text>
         <FormControl>
-          <FormLabel>Πιστοποιητικο:</FormLabel>
+          <FormLabel>Πιστοποιητικό:</FormLabel>
           <Select
-            placeholder="Επιλεξτε Πιστοποιητικο"
+            placeholder="Επιλέξτε Πιστοποιητικό"
             value={selectedCertificate}
             onChange={(e) => setSelectedCertificate(e.target.value)}
           >
@@ -83,11 +88,16 @@ import { Button, FormControl, FormLabel, Select, Text, VStack, Center } from '@c
             ))}
           </Select>
         </FormControl>
-        {message && <Text color={message.includes('Η αιτηση σας ηταν επιτυχης') ? 'green.500' : 'red.500'}>{message}</Text>}
+        {message && <Text color={message.includes('Η αίτησή σας ήταν επιτυχής') ? 'green.500' : 'red.500'}>{message}</Text>}
         <Button colorScheme="teal" onClick={handleApply} disabled={!selectedCertificate}>
-          Επιβεβαιωση
+          Επιβεβαίωση
         </Button>
       </VStack>
+      <Box bg="#26abcc" borderBottom="4px solid #4f4f50" position="absolute" top={210} left={20}>
+        <Button bg="#26abcc" color="white" onClick={handleCertificateClick}>
+          ΟΙ ΑΙΤΗΣΕΙΣ ΜΟΥ
+        </Button>
+      </Box>
     </Center>
   );
 };
