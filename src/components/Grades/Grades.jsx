@@ -42,8 +42,8 @@ const Grades = ({ db, userEmail }) => {
   }, {});
 
   return (
-    <Flex direction="column" align="center" height="90vh">
-      <Heading mb={4} margin="20px">
+    <Flex direction="column" align="center" height="100vh">
+      <Heading mb={4} margin="20px" textAlign="center" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc" padding="5px" width="700px">
         ΒΑΘΜΟΛΟΓΙΕΣ
       </Heading>
       {Object.entries(groupedCourses).map(([semesterId, courses]) => {
@@ -53,7 +53,7 @@ const Grades = ({ db, userEmail }) => {
         // Render the semester only if there are courses with grades
         return (
           <div key={semesterId} style={{ marginBottom: '20px' , height: "100vh"}}>
-            <Heading as="h2" size="md" mb={2} color="#26abcc">
+            <Heading as="h2" size="md" mb={2} color="#26abcc" fontWeight="bold" marginLeft="20px">
               {`ΕΞΑΜΗΝΟ ${semesterId}`}
             </Heading>
             {hasGrades ? (
