@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Checkbox, Box, Flex, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, VStack, Center } from '@chakra-ui/react';
+import { Checkbox, Box, Flex, Heading, Button, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, VStack, Center } from '@chakra-ui/react';
 import {
   Modal,
   ModalOverlay,
@@ -225,8 +225,11 @@ const CourseApplication = ({ db, userCourses }) => {
 
   return (
     <Center>
-      <VStack marginRight="200px" align="start" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
-        <Text fontSize="2xl" fontWeight="bold" bg="#26abcc" color="white" mb={4}>
+      <VStack marginRight="60px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="700px" mt={100}>
+      <Heading mb={4} marginTop="-50px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+          ΔΗΛΩΣΕΙΣ
+        </Heading>
+        <Text  fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" bg="#26abcc" color="white" mb={4} style={{ marginLeft: "-300px", marginTop: "40px" }}>
           ΠΡΟΓΡΑΜΜΑ ΣΠΟΥΔΩΝ 2023-2024
         </Text>
         <Accordion width="130%" allowToggle>
@@ -264,7 +267,7 @@ const CourseApplication = ({ db, userCourses }) => {
           ))}
         </Accordion>
         {message && <Text color={message.includes('Η αίτησή σας ήταν επιτυχημένη') ? 'green.500' : 'red.500'}>{message}</Text>}
-        <Button colorScheme="teal" onClick={handleApply} disabled={selectedCourses.length === 0}>
+        <Button style={{marginLeft: "-610px"}} colorScheme="teal" onClick={handleApply} disabled={selectedCourses.length === 0}>
           ΔΗΛΩΣΗ
         </Button>
 

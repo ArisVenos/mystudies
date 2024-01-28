@@ -1,7 +1,7 @@
 // CertificateApplication.jsx
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Button, Box, FormControl, FormLabel, Select, Text, VStack, Center } from '@chakra-ui/react';
+import { Button, Box, Heading, FormControl, FormLabel, Select, Text, VStack, Center } from '@chakra-ui/react';
 
 
   const CertificateApplication = ({ db }) => {
@@ -70,13 +70,19 @@ import { Button, Box, FormControl, FormLabel, Select, Text, VStack, Center } fro
 
   return (
     <Center>
-      <VStack align="start" spacing={4}  p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="500px" mt={100}>
-        <Text fontSize="2xl" fontWeight="bold" bg="#26abcc" color="white" p={2} borderRadius="md">
+      <VStack align="center" spacing={4}  p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="500px" mt={100}>
+      <Heading mb={4} marginTop="-50px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+          ΠΙΣΤΟΠΟΙΗΤΙΚΑ
+        </Heading>
+        <Text fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" bg="#26abcc" color="white" mb={4} style={{ marginLeft: "-430px", marginTop: "40px" }}>
           ΝΕΑ ΑΙΤΗΣΗ
         </Text>
         <FormControl>
-          <FormLabel>Πιστοποιητικό:</FormLabel>
+          <FormLabel fontSize="2xl">
+            Πιστοποιητικό:
+          </FormLabel>
           <Select
+            fontSize="xl"
             placeholder="Επιλέξτε Πιστοποιητικό"
             value={selectedCertificate}
             onChange={(e) => setSelectedCertificate(e.target.value)}

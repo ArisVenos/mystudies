@@ -64,7 +64,7 @@ const AppliedCertificatesList = ({ db }) => {
             ΑΙΤΗΣΕΙΣ
           </Text>
           <Spacer />
-          <Text fontSize="2xl" fontWeight="bold" mb={2} bg="#26abcc" color="white" width="32%" >
+          <Text fontSize="2xl" fontWeight="bold" mb={2} bg="#26abcc" color="white" width="30%" >
             ΚΑΤΑΣΤΑΣΗ
           </Text>
         </HStack>
