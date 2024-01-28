@@ -44,6 +44,11 @@ const NavBar = () => {
     // Change the window location to the desired page
     window.location.href = "/help";
   };
+  
+  const handleProfessorClick = () => {
+    // Change the window location to the desired page
+    window.location.href = "/professor";
+  };
 
   return (
     <div>
@@ -62,7 +67,13 @@ const NavBar = () => {
         )}
       </HStack>
       {/* Conditionally render the second row of buttons based on user role */}
-      {isProfessor ? null : (
+      {isProfessor ? (
+        <HStack bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" justify="center">
+        <Button bg="#26abcc" color="white" onClick={handleProfessorClick} marginRight="20px">
+          ΑΡΧΙΚΗ
+        </Button>
+      </HStack>
+      ) : (
         <HStack bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" justify="center">
           <Button bg="#26abcc" color="white" onClick={handleHomeClick} marginRight="20px">
             ΑΡΧΙΚΗ

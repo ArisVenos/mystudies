@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { Box, Center, Table, Thead, Tbody, Tr, Th, Td , Button , Flex} from '@chakra-ui/react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { Box, Center, Table, Thead, Tbody, Tr, Th, Td, Input, Button } from '@chakra-ui/react';
 
-const Professor = ({ db }) => {
+const ProfessorModify = ({ db }) => {
   const [courseId, setCourseId] = useState(null);
   const [courseDetails, setCourseDetails] = useState(null);
   const [userGrades, setUserGrades] = useState({});
-
-  const handleModifyClick = () => {
-    // Change the window location to the desired page
-    window.location.href = "/professorModify";
-};
+  const [modifiedGrades, setModifiedGrades] = useState({});
 
   useEffect(() => {
-    // Fetch professor data when component mounts
+    // Fetch professor data when the component mounts
     fetchProfessorData();
   }, []);
 
   useEffect(() => {
+    // Update user grades when the courseDetails or courseId change
     if (courseDetails && courseDetails.declaredUsers && courseDetails.declaredUsers.length > 0) {
-      // Use Promise.all to await all the asynchronous operations
       const fetchGradePromises = courseDetails.declaredUsers.map(async (userEmail) => {
-        // Fetch the user document to get the grade
         const userRef = doc(db, 'users', userEmail);
         const userDoc = await getDoc(userRef);
 
@@ -36,10 +31,8 @@ const Professor = ({ db }) => {
         }
       });
 
-      // Wait for all promises to resolve
       Promise.all(fetchGradePromises)
         .then(userGrades => {
-          // Set the user grades in the state
           const userGradesObject = userGrades.reduce((acc, { userEmail, userGrade }) => {
             acc[userEmail] = userGrade === -1 ? '-' : userGrade;
             return acc;
@@ -52,25 +45,61 @@ const Professor = ({ db }) => {
     }
   }, [db, courseId, courseDetails]);
 
+  const handleGradeChange = (userEmail, newGrade) => {
+    setModifiedGrades(prevGrades => ({ ...prevGrades, [userEmail]: newGrade }));
+  };
+
+  const handleSubmitGrades = async () => {
+    try {
+      const userEmail = localStorage.getItem('email');
+
+      // Update the grades in the users' documents
+      const updateGradePromises = Object.entries(modifiedGrades).map(async ([userEmail, newGrade]) => {
+        const userRef = doc(db, 'users', userEmail);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          const updatedCourses = userData.courses.map(course => {
+            if (course.id === courseId.id) {
+              return { ...course, grade: newGrade === '-' ? -1 : parseInt(newGrade) };
+            } else {
+              return course;
+            }
+          });
+
+          // Update the user document with the new grades
+          await updateDoc(userRef, { courses: updatedCourses });
+          console.log(`Grade updated for ${userEmail}`);
+          window.location.href = '/professor';
+        } else {
+          console.log(`User document for ${userEmail} does not exist`);
+        }
+      });
+
+      // Wait for all promises to resolve
+      await Promise.all(updateGradePromises);
+
+      // Clear the modified grades state after updating
+      setModifiedGrades({});
+    } catch (error) {
+      console.error('Error updating grades:', error.message);
+    }
+  };
+
   async function fetchProfessorData() {
     try {
       const userEmail = localStorage.getItem('email');
-      // Create a reference to the professor's document
       const professorRef = doc(db, 'users', userEmail);
-
-      // Fetch the professor's document
       const professorDoc = await getDoc(professorRef);
 
       if (professorDoc.exists()) {
-        console.log('Professor document data:', professorDoc.data());
         const professorData = professorDoc.data();
 
-        // If the professor has courses array with exactly one ID
         if (professorData.courses && professorData.courses.length === 1) {
           const courseId = professorData.courses[0];
           setCourseId(courseId);
 
-          // Fetch the course details based on courseId.id
           const coursesCollection = doc(db, 'courses', 'all_courses');
           const courseDoc = await getDoc(coursesCollection);
 
@@ -98,19 +127,19 @@ const Professor = ({ db }) => {
   }
 
   return (
-    <Flex direction="column" align="center">
-    <Center marginTop="30px" marginBottom="50px">
+    <Center marginTop="30px" marginBottom="350px">
       <Box mt="8">
         {courseDetails && (
           <>
             <Box as="h1" fontSize="2xl" fontWeight="bold" mb="4">
               Course ID: {courseId.id} - {courseDetails.title}
             </Box>
-            <Table variant="striped" bg="#26abcc">
-              <Thead>
+            <Table variant="striped" bg="white" width="600px">
+              <Thead bg="#26abcc">
                 <Tr>
-                  <Th><strong>E-mail Φοιτητη</strong></Th>
-                  <Th textAlign="right"><strong>Βαθμος</strong></Th>
+                  <Th color="black" fontWeight="bold">Email</Th>
+                  <Th color="black" fontWeight="bold" textAlign="right">ΒΑΘΜΟΣ</Th>
+                  <Th textAlign="right" color="black" fontWeight="bold">ΝΕΟΣ ΒΑΘΜΟΣ</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -118,17 +147,29 @@ const Professor = ({ db }) => {
                   <Tr key={userEmail}>
                     <Td>{userEmail}</Td>
                     <Td textAlign="right">{userGrade}</Td>
+                    <Td textAlign="right">
+                      <Input
+                        type="text"
+                        placeholder="Νέος βαθμός"
+                        textAlign="right"
+                        onChange={(e) => handleGradeChange(userEmail, e.target.value)}
+                        style={{ width: "130px", outline: "1px solid black" }}
+                      />
+                    </Td>
                   </Tr>
                 ))}
               </Tbody>
             </Table>
+            <Center mt="4">
+              <Button  onClick={handleSubmitGrades} bg="#26abcc">
+                ΥΠΟΒΟΛΗ
+              </Button>
+            </Center>
           </>
         )}
       </Box>
     </Center>
-    <Button variant="solid" bg='#26abcc' onClick={handleModifyClick} marginBottom="420px" alignContent="center"> Τροποποίηση Βαθμολογίας </Button>
-    </Flex>
   );
 };
 
-export default Professor;
+export default ProfessorModify;
