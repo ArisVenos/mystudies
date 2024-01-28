@@ -225,19 +225,20 @@ const CourseApplication = ({ db, userCourses }) => {
 
   return (
     <Center>
-      <VStack marginRight="60px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="700px" mt={100}>
-      <Heading mb={4} marginTop="-50px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+      <Flex flexDirection="column" height="100vh">
+      <Heading mb={4} marginTop="30px" textAlign="center" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
           ΔΗΛΩΣΕΙΣ
-        </Heading>
-        <Text  fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" bg="#26abcc" color="white" mb={4} style={{ marginLeft: "-300px", marginTop: "40px" }}>
+      </Heading>
+      <VStack marginRight="60px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md"  w="600px" h="700px" mt={100} width="1000px">
+        <Text  fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" bg="#26abcc" padding="5px" color="white" mb={4} style={{  marginTop: "-100px" }}>
           ΠΡΟΓΡΑΜΜΑ ΣΠΟΥΔΩΝ 2023-2024
         </Text>
-        <Accordion width="130%" allowToggle>
+        <Accordion width="100%" allowToggle>
           {semesters.map((semester) => (
             <AccordionItem key={semester.id}>
               <h2>
                 <AccordionButton>
-                  <Text fontSize="2xl" bg="#26abcc" color="white" as="span" flex="1" textAlign="left">
+                  <Text fontSize="2xl" bg="#26abcc" color="white" as="span" flex="1" textAlign="left" padding="5px">
                     {semester.title}
                   </Text>
                   <AccordionIcon />
@@ -267,7 +268,7 @@ const CourseApplication = ({ db, userCourses }) => {
           ))}
         </Accordion>
         {message && <Text color={message.includes('Η αίτησή σας ήταν επιτυχημένη') ? 'green.500' : 'red.500'}>{message}</Text>}
-        <Button style={{marginLeft: "-610px"}} colorScheme="teal" onClick={handleApply} disabled={selectedCourses.length === 0}>
+        <Button style={{marginLeft: "-835px"}} bg="#26abcc" onClick={handleApply} color="white" disabled={selectedCourses.length === 0}>
           ΔΗΛΩΣΗ
         </Button>
 
@@ -294,8 +295,8 @@ const CourseApplication = ({ db, userCourses }) => {
                 ))}
               </ModalBody>
             <ModalFooter>
-              <Button colorScheme="teal" onClick={handleApplyAll}>Επιβεβαίωση</Button>
-              <Button variant="ghost" onClick={handleCloseConfirmModal}>Ακύρωση</Button>
+              <Button variant="ghost" colorScheme="red" marginRight="20px" onClick={handleCloseConfirmModal}>Ακύρωση</Button>
+              <Button bg="#26abcc" onClick={handleApplyAll} color="white">Επιβεβαίωση</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
@@ -329,12 +330,13 @@ const CourseApplication = ({ db, userCourses }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="teal" onClick={handleCloseCourseInfoModal}>
+            <Button bg="#26abcc" onClick={handleCloseCourseInfoModal} marginRight="20px">
               Κλείσιμο
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+      </Flex>
     </Center>
   );
 };
