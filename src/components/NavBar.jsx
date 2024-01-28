@@ -47,7 +47,7 @@ const NavBar = () => {
   
   const handleProfessorClick = () => {
     // Change the window location to the desired page
-    window.location.href = "/professor";
+    window.location.href = "/professorMain";
   };
 
   return (
