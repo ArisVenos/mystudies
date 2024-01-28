@@ -126,7 +126,7 @@ export default function Register({ db }) {
   return (
     <div className='register'>
       <form style={{ height: '600px', width: '600px' }} onSubmit={handleRegister} className='register-container'>
-        <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>ΕΓΓΡΑΦΗ</h2>
+        <h2 style={{ textAlign: 'center' , borderBottom: '4px solid #4f4f50' , fontWeight: "bold" , color: "white" , backgroundColor:"#26abcc" , padding: '10px' , width: '600px' }}>ΕΓΓΡΑΦΗ</h2>
         <Flex justifyContent='center' alignItems='center' flexDirection='row' >
         <Image src={logo} alt="logo" marginRight="60px" width="250px"/>
           <Flex justifyContent='center' alignItems='center' flexDirection='column'>

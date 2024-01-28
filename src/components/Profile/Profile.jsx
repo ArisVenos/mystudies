@@ -53,12 +53,14 @@ const Profile = ({ db}) => {
 
   return (
     <Flex direction="column" align="center" height="76vh">
-      <Heading mb={4} marginTop="20px">ΣΤΟΙΧΕΙΑ ΧΡΗΣΤΗ</Heading>
+      <Heading mb={4} marginTop="20px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc" width="800px" padding="4px" textAlign="center">
+        ΣΤΟΙΧΕΙΑ ΧΡΗΣΤΗ
+      </Heading>
       {userData ? (
         <div>
-          <TableContainer width="500px" border="2px">
+          <TableContainer width="798px" border="2px">
             <Table variant="striped" bg="#26abcc">
-              <Tbody>
+              <Tbody fontWeight="bold">
                 <Tr>
                   <Td textAlign="left">Ονομα:</Td>
                   <Td textAlign="right">{userData.name}</Td>
@@ -72,7 +74,7 @@ const Profile = ({ db}) => {
                   <Td textAlign="right">{userData.id}</Td>
                 </Tr>
                 <Tr>
-                  <Td textAlign="left">Role:</Td>
+                  <Td textAlign="left">Ιδιότητα:</Td>
                   <Td textAlign="right">{userData.role}</Td>
                 </Tr>
                 <Tr>

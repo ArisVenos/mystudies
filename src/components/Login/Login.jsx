@@ -1,6 +1,6 @@
 import './Login.css'
 import React, { useState } from 'react';
-import { Button , ButtonGroup , Flex } from '@chakra-ui/react';
+import { Button , ButtonGroup , Flex , Input} from '@chakra-ui/react';
 import { doc, getDoc } from 'firebase/firestore'
 
 
@@ -47,28 +47,30 @@ export default function Login({db}){
     return(
         <div className='login'>
             <form style={{height: '400px'}} onSubmit={handleLogin} className='login-container'>
-                <h2 style={{ textAlign: 'center' }}>ΕΙΣΟΔΟΣ</h2>
+                <h2 style={{ textAlign: 'center' , borderBottom: '4px solid #4f4f50' , fontWeight: "bold" , color: "white" , backgroundColor:"#26abcc" }} >ΕΙΣΟΔΟΣ</h2>
                 <div className='login-row'>
-                    <label>Email:</label>
                     &nbsp;&nbsp;&nbsp;
-                    <input
+                    <Input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        variant="filled"
+                        placeholder='Email'
                     />
                 </div>
                 <div className='login-row'>
-                    <label>Password:</label>
                     &nbsp;&nbsp;&nbsp;
-                    <input
+                    <Input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        variant="filled"
+                        placeholder='Password'
                     />
                 </div>
                 <Flex justifyContent="center" alignItems="center" flexDirection="column" marginTop='20px'>
                     <Button variant='outline' color="#26abcc" borderColor="#26abcc" type='submit'>ΕΙΣΟΔΟΣ</Button>
-                    <a href='/register' style={{ marginTop: '20px'}} onClick={() => window.location.href = '/register'}>ΝΕΟΣ ΧΡΗΣΤΗΣ</a>
+                    <a href='/register' style={{ marginTop: '20px'}} onClick={() => window.location.href = '/register'}><strong>ΝΕΟΣ ΧΡΗΣΤΗΣ? Κάντε εγγραφή!</strong></a>
                 </Flex> 
             </form>
         </div>

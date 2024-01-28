@@ -12,14 +12,9 @@
     width: fit-content;
     height: 150px;
     margin: 0px;
-    padding: 20px;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    position: relative;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-.register-container h2{
-    margin: 0px;
 }
 .register-row{
     text-align: left;
