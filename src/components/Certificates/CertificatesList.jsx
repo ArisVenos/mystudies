@@ -80,7 +80,6 @@ const AppliedCertificatesList = ({ db }) => {
                   <Spacer />
                   <Text fontSize="2xl" fontWeight="bold">{certificate.status}</Text>
                   <Button size="xs" h="28px" borderRadius="10" colorScheme="teal" leftIcon={<FaPrint />} onClick={handlePrintClick}>
-                    
                   </Button>
                 </Box>
             ))}
