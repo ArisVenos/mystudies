@@ -7,6 +7,9 @@ const NavBar = () => {
   // Check if the user is logged in
   const isLoggedIn = localStorage.getItem("role") !== null;
 
+  // Check if the user is a professor
+  const isProfessor = localStorage.getItem("role") === "professor";
+
   const handleLoginClick = () => {
     // Change the window location to the desired page
     window.location.href = "/login";
@@ -58,23 +61,26 @@ const NavBar = () => {
           </Button>
         )}
       </HStack>
-      <HStack bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" justify="center">
-        <Button bg="#26abcc" color="white" onClick={handleHomeClick} marginRight="20px">
-          ΑΡΧΙΚΗ
-        </Button>
-        <Button bg="#26abcc" color="white" onClick={handleCoursesClick} marginRight="20px">
-          ΔΗΛΩΣΕΙΣ
-        </Button>
-        <Button bg="#26abcc" color="white" onClick={handleGradesClick} marginRight="20px">
-          ΒΑΘΜΟΛΟΓΙΕΣ
-        </Button>
-        <Button bg="#26abcc" color="white" onClick={handleCertificateClick} marginRight="20px">
-          ΠΙΣΤΟΠΟΙΗΤΙΚΑ
-        </Button>
-        <Button bg="#26abcc" color="white" onClick={handleHelpClick}>
-          ΒΟΗΘΕΙΑ
-        </Button>
-      </HStack>
+      {/* Conditionally render the second row of buttons based on user role */}
+      {isProfessor ? null : (
+        <HStack bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" justify="center">
+          <Button bg="#26abcc" color="white" onClick={handleHomeClick} marginRight="20px">
+            ΑΡΧΙΚΗ
+          </Button>
+          <Button bg="#26abcc" color="white" onClick={handleCoursesClick} marginRight="20px">
+            ΔΗΛΩΣΕΙΣ
+          </Button>
+          <Button bg="#26abcc" color="white" onClick={handleGradesClick} marginRight="20px">
+            ΒΑΘΜΟΛΟΓΙΕΣ
+          </Button>
+          <Button bg="#26abcc" color="white" onClick={handleCertificateClick} marginRight="20px">
+            ΠΙΣΤΟΠΟΙΗΤΙΚΑ
+          </Button>
+          <Button bg="#26abcc" color="white" onClick={handleHelpClick}>
+            ΒΟΗΘΕΙΑ
+          </Button>
+        </HStack>
+      )}
     </div>
   );
 };

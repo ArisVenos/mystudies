@@ -30,7 +30,14 @@ export default function Login({db}){
             localStorage.setItem('name', res.data().name)
 
             // Go to page /courses
-            window.location.href = './index.html'
+            if (user_role === 'professor') {
+                // Go to professor page
+                window.location.href = './professor';
+              } else {
+                // Go to student page (you can update this with the appropriate route)
+                window.location.href = './index.html';
+            }
+
             console.log("Found User:", res.data());
         } else {
             console.log("No such document!");

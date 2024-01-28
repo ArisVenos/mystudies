@@ -51,32 +51,34 @@ export default function Register({ db }) {
 
   async function handleRegister(e) {
     e.preventDefault();
-
+  
     // Check if email and password are not empty
     if (!email || !password) {
       // Handle empty fields if needed
       return;
     }
-
-
+  
     try {
       // Log to check if the function is being called
       console.log('handleRegister function called');
   
-      // Log the userCourses to check if it contains the expected data
-      console.log('userCourses:', userCourses);
+      // Check if the email ends with "@prof" to determine the role
+      const role = email.toLowerCase().endsWith('@prof') ? 'professor' : 'student';
+  
+      // Create an empty courses array for professors
+      const courses = role === 'professor' ? [{id: -1}] : userCourses;
   
       // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key as the email of the user
       const ref_user = doc(db, 'users', email);
-      const res_user = await setDoc(ref_user, docUser);
+      const res_user = await setDoc(ref_user, { ...docUser, role, courses }); // Include the role and courses in the document
       console.log('User document created successfully');
   
       // Create a reference to the 'all_courses' document
       const ref_all_courses = doc(db, 'courses', 'all_courses');
-
+  
       // Fetch the 'all_courses' document
       const all_courses_doc = await getDoc(ref_all_courses);
-
+  
       // Check if the 'all_courses' document exists
       if (!all_courses_doc.exists()) {
         // If the 'all_courses' document doesn't exist, create it with userCourses
@@ -87,7 +89,7 @@ export default function Register({ db }) {
       }
   
       onOpen();
-    }  catch (e) {
+    } catch (e) {
       console.error('Error during registration:', e.message);
     }
   }
