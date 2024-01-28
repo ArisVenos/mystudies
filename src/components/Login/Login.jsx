@@ -32,7 +32,7 @@ export default function Login({db}){
             // Go to page /courses
             if (user_role === 'professor') {
                 // Go to professor page
-                window.location.href = './professor';
+                window.location.href = './professorMain';
               } else {
                 // Go to student page (you can update this with the appropriate route)
                 window.location.href = './index.html';

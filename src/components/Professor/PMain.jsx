@@ -61,7 +61,7 @@ const PMain = ({ db }) => {
     <Flex direction="column" align="center" height="100vh" bgImage={bg} bgSize="cover" bgPosition="center" bgRepeat="no-repeat">
       <Center marginTop="30px" marginBottom="50px">
         <Box mt="8" p={4} borderRadius="md" bg="white" height="750px" border="2px solid black" width='1000px'>
-            <h2 align="center" style={{margin: '30px'}}>ΔΙΑΘΕΣΙΜΑ ΜΑΘΗΜΑΤΑ</h2>
+            <h2 align="center" style={{margin: '30px' , textAlign: 'center' , borderBottom: '4px solid #4f4f50' , fontWeight: "bold" , color: "white" , backgroundColor:"#26abcc"}}>ΔΙΑΘΕΣΙΜΑ ΜΑΘΗΜΑΤΑ</h2>
           <Box>
             <Table variant="striped" bg="#26abcc" border="2px" width='700px' align="center">
               <Thead>
@@ -86,7 +86,7 @@ const PMain = ({ db }) => {
               </Tbody>
             </Table>
             <Card marginTop="50px" border="2px solid black" width="700px" height="400px" textAlign="center" marginLeft="130px">
-                <CardHeader bg="#26abcc" height="50px" >ΟΔΗΓΙΕΣ</CardHeader>
+                <CardHeader bg="#26abcc" height="50px" > <strong>ΟΔΗΓΙΕΣ</strong></CardHeader>
                 <CardBody textAlign="left">
                     <p>• Στην αρχική σελίδα θα βρείτε τα διαθέσιμα μαθήματα για το τρέχον εξάμηνο.</p>
                     <p>• Για την επεξεργασία του βαθμολογίου κάθε μαθήματος πατάτε στο κουμπί βαθμολόγιο δίπλα από το συγκεκριμένο μάθημα.</p>
