@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDoc, doc } from 'firebase/firestore';
-import { Button, Spacer, Box, Text, VStack, Center, HStack, useToast } from '@chakra-ui/react';
+import { Button, Spacer, Heading, Box, Text, VStack, Center, HStack, useToast } from '@chakra-ui/react';
 import { FaPrint } from 'react-icons/fa';
 
 const AppliedCertificatesList = ({ db }) => {
@@ -58,8 +58,11 @@ const AppliedCertificatesList = ({ db }) => {
 
   return (
     <Center>
-      <VStack marginRight="200px" align="start" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
-        <HStack bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" width="150%">
+      <VStack align="center" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
+      <Heading mb={4}  marginTop="-30px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+          ΠΙΣΤΟΠΟΙΗΤΙΚΑ
+        </Heading>
+        <HStack style={{ marginTop: "40px" }} bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" width="150%">
           <Text fontSize="2xl" fontWeight="bold" mb={2} bg="#26abcc" color="white"  >
             ΑΙΤΗΣΕΙΣ
           </Text>
@@ -73,7 +76,7 @@ const AppliedCertificatesList = ({ db }) => {
         ) : appliedCertificates.length === 0 ? (
           <Text>ΔΕΝ ΥΠΑΡΧΕΙ ΚΑΠΟΙΑ ΑΙΤΗΣΗ.</Text>
         ) : (
-          <VStack align="start" spacing={2} w="100%">
+          <VStack align="center" spacing={2} w="100%">
             {appliedCertificates.map((certificate, index) => (
                 <Box key={index} borderWidth="2px" borderRadius="md" p={2} w="150%" display="flex" justifyContent="space-between">
                   <Text fontSize="2xl" fontWeight="bold">{certificate.title}</Text>
