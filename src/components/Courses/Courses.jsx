@@ -182,7 +182,7 @@ const CourseApplication = ({ db, userCourses }) => {
 
     } catch (error) {
       console.error('Error applying for course:', error.message);
-      setMessage('Σφάλμα κατά την υποβολή αίτησης. Παρακαλώ προσπαθήστε ξανά.');
+      setMessage('Σφάλμα κατά την υποβολή αίτησης. Παρακαλώ συνδεθείτε πρώτα.');
     }
   };
 

@@ -111,8 +111,8 @@ const AppliedCoursesList = ({ db }) => {
 
   return (
     <Center>
-      <VStack marginRight="100px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="700px" mt={100}>
-        <Heading mb={4} marginTop="-50px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+      <VStack marginRight="100px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md" w="600px" h="700px" mt={100}>
+        <Heading mb={4} marginTop="-90px" textAlign="center" margin="0px 0px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" width="900px" color="white" bg="#26abcc">
           ΙΣΤΟΡΙΚΟ ΔΗΛΩΣΕΩΝ
         </Heading>
         {loading ? (
@@ -120,7 +120,7 @@ const AppliedCoursesList = ({ db }) => {
         ) : appliedCourses.length === 0 ? (
           <Text>ΔΕΝ ΕΧΕΤΕ ΚΑΜΙΑ ΔΗΛΩΣΗ.</Text>
         ) : (
-          <VStack marginTop="50px" marginLeft="80px" align="center" spacing={2} w="100%">
+          <VStack marginTop="10px" marginLeft="0px" align="center" spacing={2} w="100%">
             {appliedCourses.map((course, index) => (
               <Box key={index} borderWidth="2px" borderRadius="md" p={2} w="150%" display="flex" justifyContent="space-between">
                 <Text fontSize="large" fontWeight="bold">{course.title}</Text>
