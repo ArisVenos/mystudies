@@ -14,6 +14,7 @@ import CoursesHistory from './components/Courses/CoursesHistory.jsx';
 import Grades from './components/Grades/Grades.jsx';
 import Help from './components/Help/Help.jsx';
 import Professor from './components/Professor/Professor.jsx';
+import ProfessorModify from './components/Professor/ProfessorModify.jsx';
 
 import { firebaseConfig } from './config';
 import { initializeApp } from 'firebase/app';
@@ -40,7 +41,8 @@ function MainApp() {
                         <Route path="/profile" element={<Profile db={db}/>} />
                         <Route path="/grades" element={<Grades db={db}/>} />
                         <Route path="/help" element={<Help db={db}/>} />
-                        <Route path="/professor" element={<Professor />} />
+                        <Route path="/professor" element={<Professor db={db} />} />
+                        <Route path="/professorModify" element={<ProfessorModify db={db} />} />
                     </Routes>
                 </BrowserRouter>
             </GridItem>
