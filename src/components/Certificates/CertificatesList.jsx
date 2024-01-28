@@ -58,11 +58,11 @@ const AppliedCertificatesList = ({ db }) => {
 
   return (
     <Center>
-      <VStack align="center" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
-      <Heading mb={4}  marginTop="-30px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+      <VStack align="center" spacing={4} p={4} bgColor="white" borderRadius="md" w="600px" h="600px" mt={100}>
+      <Heading mb={4} width="850px" textAlign="center"  marginTop="-90px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
           ΠΙΣΤΟΠΟΙΗΤΙΚΑ
         </Heading>
-        <HStack style={{ marginTop: "40px" }} bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" width="150%">
+        <HStack style={{ marginTop: "0px" }} bg="#26abcc" p={2} borderBottom="4px solid #4f4f50" width="150%">
           <Text fontSize="2xl" fontWeight="bold" mb={2} bg="#26abcc" color="white"  >
             ΑΙΤΗΣΕΙΣ
           </Text>
@@ -82,7 +82,8 @@ const AppliedCertificatesList = ({ db }) => {
                   <Text fontSize="2xl" fontWeight="bold">{certificate.title}</Text>
                   <Spacer />
                   <Text fontSize="2xl" fontWeight="bold">{certificate.status}</Text>
-                  <Button size="xs" h="28px" borderRadius="10" colorScheme="teal" leftIcon={<FaPrint />} onClick={handlePrintClick}>
+                  <Button size="s" h="40px" borderRadius="10" bg="#26abcc" leftIcon={<FaPrint />} onClick={handlePrintClick} style={{marginLeft: '2px'}} width="120px">
+                    Εκτύπωση
                   </Button>
                 </Box>
             ))}

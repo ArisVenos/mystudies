@@ -230,7 +230,7 @@ const CourseApplication = ({ db, userCourses }) => {
           ΔΗΛΩΣΕΙΣ
       </Heading>
       <VStack marginRight="60px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md"  w="600px" h="700px" mt={100} width="1000px">
-        <Text  fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" bg="#26abcc" padding="5px" color="white" mb={4} style={{  marginTop: "-100px" }}>
+        <Text  fontSize="2xl" borderBottom="4px solid #4f4f50" width="1060px" fontWeight="bold" bg="#26abcc" padding="5px" color="white" mb={4} style={{marginLeft: '55px' , marginTop: "-100px" }}>
           ΠΡΟΓΡΑΜΜΑ ΣΠΟΥΔΩΝ 2023-2024
         </Text>
         <Accordion width="100%" allowToggle>

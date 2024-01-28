@@ -39,16 +39,16 @@ const HelpInterface = () => {
 
   return (
     <Center>
-      <VStack marginRight="80px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="600px" mt={100}>
-      <Heading mb={4} marginLeft="-50px" marginTop="-50px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+      <VStack marginRight="80px" align="center" spacing={4} p={4} bgColor="white" borderRadius="md" w="600px" h="600px" mt={100}>
+      <Heading mb={4}  marginTop="-90px" width="750px" textAlign="center" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
           ΒΟΗΘΕΙΑ
         </Heading>
-        <Accordion style={{ marginTop: "40px" }} width="130%" allowToggle>
+        <Accordion width="130%" allowToggle>
           {helpTopics.map((topic) => (
             <AccordionItem key={topic.id}>
               <h2>
                 <AccordionButton>
-                  <Text color = "white" fontSize="2xl" bg="#26abcc"  as="span" flex="1" textAlign="left">
+                  <Text color = "white" fontSize="2xl" bg="#26abcc" fontWeight="bold" padding="4px"  as="span" flex="1" textAlign="left">
                     {topic.title}
                   </Text>
                   <AccordionIcon />

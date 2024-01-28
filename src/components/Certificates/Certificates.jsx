@@ -69,12 +69,12 @@ import { Button, Box, Heading, FormControl, FormLabel, Select, Text, VStack, Cen
 
 
   return (
-    <Center>
-      <VStack align="center" spacing={4}  p={4} bgColor="white" borderRadius="md" boxShadow="md" w="600px" h="500px" mt={100}>
-      <Heading mb={4} marginTop="-50px" margin="1px 40px 1000" padding="4px" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
+    <Center height="100vh">
+      <VStack align="center" spacing={4}  p={4} bgColor="white" borderRadius="md" w="600px" h="500px" mt={100}>
+      <Heading mb={4} marginTop="-250px" margin="1px 40px 1000" padding="4px" width="850px" textAlign="center" borderBottom="4px solid #4f4f50" fontWeight="bold" color="white" bg="#26abcc">
           ΠΙΣΤΟΠΟΙΗΤΙΚΑ
         </Heading>
-        <Text fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" bg="#26abcc" color="white" mb={4} style={{ marginLeft: "-430px", marginTop: "40px" }}>
+        <Text fontSize="2xl" borderBottom="4px solid #4f4f50" fontWeight="bold" width="850px" padding="4px" bg="#26abcc" color="white" mb={4} style={{ marginTop: "0px" }}>
           ΝΕΑ ΑΙΤΗΣΗ
         </Text>
         <FormControl>
@@ -95,7 +95,7 @@ import { Button, Box, Heading, FormControl, FormLabel, Select, Text, VStack, Cen
           </Select>
         </FormControl>
         {message && <Text color={message.includes('Η αίτησή σας ήταν επιτυχής') ? 'green.500' : 'red.500'}>{message}</Text>}
-        <Button colorScheme="teal" onClick={handleApply} disabled={!selectedCertificate}>
+        <Button bg="#26abcc" color="white" onClick={handleApply} disabled={!selectedCertificate}>
           Επιβεβαίωση
         </Button>
       </VStack>
