@@ -19,8 +19,8 @@ const AppliedCoursesList = ({ db }) => {
         const userData = userCourseDoc.data();
         // Assuming courses is an array of objects with title and declared properties
         const courses = userData.courses || [];
-        const filteredCourses = courses.filter(course => course.declared === 1);
-        setAppliedCourses(filteredCourses.map(course => ({ title: course.title, status: 'ΕΓΓΕΓΡΑΜΜΕΝΟΣ' })));
+        const filteredCourses = courses.filter(course => course.declared === 1 || course.declared === 10);
+        setAppliedCourses(filteredCourses.map(course => ({ title: course.title, declared: course.declared })));
       }
 
       setLoading(false);
@@ -45,7 +45,7 @@ const AppliedCoursesList = ({ db }) => {
       const courses = userCourseDoc.data().courses || [];
   
       // Find the course with the specified title and declared: 1
-      const courseToRemove = courses.find(course => course.title === courseTitle && course.declared === 1);
+      const courseToRemove = courses.find(course => course.title === courseTitle &&  course.declared === 1);
   
       if (courseToRemove) {
         // Remove the course with declared: 1
@@ -125,9 +125,12 @@ const AppliedCoursesList = ({ db }) => {
               <Box key={index} borderWidth="2px" borderRadius="md" p={2} w="150%" display="flex" justifyContent="space-between">
                 <Text fontSize="large" fontWeight="bold">{course.title}</Text>
                 <Box>
-                  <Button size="sm" colorScheme="red" onClick={() => handleDeleteCourse(course.title)}>
-                    ΔΙΑΓΡΑΦΗ
-                  </Button>
+                  {console.log('Declared value:', course.declared)}
+                  {course.declared === 1 && ( // Check if declared value is 1
+                    <Button size="sm" colorScheme="red" onClick={() => handleDeleteCourse(course.title)}>
+                      ΔΙΑΓΡΑΦΗ
+                    </Button>
+                  )}
                 </Box>
               </Box>
             ))}
