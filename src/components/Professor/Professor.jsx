@@ -106,7 +106,7 @@ const Professor = ({ db }) => {
             <Box as="h1" fontSize="2xl" fontWeight="bold" mb="4">
               Course ID: {courseId.id} - {courseDetails.title}
             </Box>
-            <Table variant="striped" bg="#26abcc">
+            <Table variant="striped" bg="#26abcc" border="2px">
               <Thead>
                 <Tr>
                   <Th><strong>E-mail Φοιτητη</strong></Th>

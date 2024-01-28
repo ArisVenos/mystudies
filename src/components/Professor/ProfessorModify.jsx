@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { Box, Center, Table, Thead, Tbody, Tr, Th, Td, Input, Button } from '@chakra-ui/react';
+import { Box, Center, Table, Thead, Tbody, Tr, Th, Td, Input, Button , Flex } from '@chakra-ui/react';
 
 const ProfessorModify = ({ db }) => {
   const [courseId, setCourseId] = useState(null);
   const [courseDetails, setCourseDetails] = useState(null);
   const [userGrades, setUserGrades] = useState({});
   const [modifiedGrades, setModifiedGrades] = useState({});
+
+  const handleCancel = () => {
+    // Change the window location to the desired page
+    window.location.href = "/professor";
+  };
 
   useEffect(() => {
     // Fetch professor data when the component mounts
@@ -127,14 +132,14 @@ const ProfessorModify = ({ db }) => {
   }
 
   return (
-    <Center marginTop="30px" marginBottom="350px">
+    <Center marginTop="30px" marginBottom="350px" height="35vh">
       <Box mt="8">
         {courseDetails && (
           <>
             <Box as="h1" fontSize="2xl" fontWeight="bold" mb="4">
               Course ID: {courseId.id} - {courseDetails.title}
             </Box>
-            <Table variant="striped" bg="white" width="600px">
+            <Table variant="striped" bg="white" width="600px" border="2px" >
               <Thead bg="#26abcc">
                 <Tr>
                   <Th color="black" fontWeight="bold">Email</Th>
@@ -161,9 +166,14 @@ const ProfessorModify = ({ db }) => {
               </Tbody>
             </Table>
             <Center mt="4">
+              <Flex marginTop="30px">
+              <Button  onClick={handleCancel} bg="red" marginRight="360px">
+                ΑΚΥΡΩΣΗ
+              </Button>
               <Button  onClick={handleSubmitGrades} bg="#26abcc">
                 ΥΠΟΒΟΛΗ
               </Button>
+              </Flex>
             </Center>
           </>
         )}
