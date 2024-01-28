@@ -104,13 +104,13 @@ const Professor = ({ db }) => {
         {courseDetails && (
           <>
             <Box as="h1" fontSize="2xl" fontWeight="bold" mb="4">
-              Course ID: {courseId.id} - {courseDetails.title}
+              ΒΑΘΜΟΛΟΓΙΟ - {courseDetails.title}
             </Box>
             <Table variant="striped" bg="#26abcc" border="2px">
               <Thead>
                 <Tr>
-                  <Th><strong>E-mail Φοιτητη</strong></Th>
-                  <Th textAlign="right"><strong>Βαθμος</strong></Th>
+                  <Th color="black"><strong>E-mail Φοιτητη</strong></Th>
+                  <Th color="black" textAlign="right"><strong>Βαθμος</strong></Th>
                 </Tr>
               </Thead>
               <Tbody>
